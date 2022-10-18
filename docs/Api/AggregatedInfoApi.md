@@ -265,7 +265,7 @@ try {
 ## `transactions()`
 
 ```php
-transactions($since, $until, $currency, $account_filter): \blockmate\Model\Transactions200Response
+transactions($since, $until, $limit, $cursor, $currency, $account_filter): \blockmate\Model\Transactions200Response
 ```
 ### URI(s):
 - https://aisp-api.blockmate.io Call
@@ -288,8 +288,10 @@ $apiInstance = new blockmate\Api\AggregatedInfoApi(
     new GuzzleHttp\Client(),
     $config
 );
-$since = Wed Jan 01 01:00:00 CET 2020; // \DateTime | Set time from which the transactions will be get. The parameter is passed as-is to backend services. The default value is 30 days before the actual date or 30 days before the date specified in \"until\" parameter.
-$until = Sat Feb 01 01:00:00 CET 2020; // \DateTime | Set time to which the transactions will be get. The parameter is passed as-is to backend services. The default value is the actual date.
+$since = Wed Jan 01 01:00:00 CET 2020; // \DateTime | Set time from which the transactions will be get.
+$until = Sat Feb 01 01:00:00 CET 2020; // \DateTime | Set time to which the transactions will be get. The default value is the actual date.
+$limit = 10; // float | Limit the number of the transactions in the response. Default page size is 50.
+$cursor = 'cursor_example'; // string | Specify on requesting the next page. Use the `page_cursor` from the previous response.
 $currency = USD; // string | Currency to convert to.
 $account_filter = 497f6eca-6276-4993-bfeb-53cbbbba6f08; // string | Filter results to only provided account. When omitted, it returns all transactions from all accounts.
 
@@ -298,7 +300,7 @@ $variables = [
 ];
 
 try {
-    $result = $apiInstance->transactions($since, $until, $currency, $account_filter, $hostIndex, $variables);
+    $result = $apiInstance->transactions($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AggregatedInfoApi->transactions: ', $e->getMessage(), PHP_EOL;
@@ -309,8 +311,10 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **since** | **\DateTime**| Set time from which the transactions will be get. The parameter is passed as-is to backend services. The default value is 30 days before the actual date or 30 days before the date specified in \&quot;until\&quot; parameter. | [optional] |
-| **until** | **\DateTime**| Set time to which the transactions will be get. The parameter is passed as-is to backend services. The default value is the actual date. | [optional] |
+| **since** | **\DateTime**| Set time from which the transactions will be get. | [optional] |
+| **until** | **\DateTime**| Set time to which the transactions will be get. The default value is the actual date. | [optional] |
+| **limit** | **float**| Limit the number of the transactions in the response. Default page size is 50. | [optional] |
+| **cursor** | **string**| Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. | [optional] |
 | **currency** | **string**| Currency to convert to. | [optional] |
 | **account_filter** | **string**| Filter results to only provided account. When omitted, it returns all transactions from all accounts. | [optional] |
 | hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |

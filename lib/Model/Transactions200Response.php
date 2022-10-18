@@ -57,6 +57,7 @@ class Transactions200Response implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
+        'page_cursor' => 'string',
         'accounts' => '\blockmate\Model\Transactions200ResponseAccountsInner[]',
         'transactions' => '\blockmate\Model\Transaction[]'
     ];
@@ -69,6 +70,7 @@ class Transactions200Response implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'page_cursor' => null,
         'accounts' => null,
         'transactions' => null
     ];
@@ -79,7 +81,8 @@ class Transactions200Response implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'accounts' => false,
+        'page_cursor' => false,
+		'accounts' => false,
 		'transactions' => false
     ];
 
@@ -159,6 +162,7 @@ class Transactions200Response implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
+        'page_cursor' => 'page_cursor',
         'accounts' => 'accounts',
         'transactions' => 'transactions'
     ];
@@ -169,6 +173,7 @@ class Transactions200Response implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
+        'page_cursor' => 'setPageCursor',
         'accounts' => 'setAccounts',
         'transactions' => 'setTransactions'
     ];
@@ -179,6 +184,7 @@ class Transactions200Response implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
+        'page_cursor' => 'getPageCursor',
         'accounts' => 'getAccounts',
         'transactions' => 'getTransactions'
     ];
@@ -240,6 +246,7 @@ class Transactions200Response implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('page_cursor', $data ?? [], null);
         $this->setIfExists('accounts', $data ?? [], null);
         $this->setIfExists('transactions', $data ?? [], null);
     }
@@ -288,6 +295,35 @@ class Transactions200Response implements ModelInterface, ArrayAccess, \JsonSeria
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets page_cursor
+     *
+     * @return string|null
+     */
+    public function getPageCursor()
+    {
+        return $this->container['page_cursor'];
+    }
+
+    /**
+     * Sets page_cursor
+     *
+     * @param string|null $page_cursor Use this as `cursor` in the next request to get the next page. The `page_cursor` has a one hour validity.
+     *
+     * @return self
+     */
+    public function setPageCursor($page_cursor)
+    {
+
+        if (is_null($page_cursor)) {
+            throw new \InvalidArgumentException('non-nullable page_cursor cannot be null');
+        }
+
+        $this->container['page_cursor'] = $page_cursor;
+
+        return $this;
+    }
 
     /**
      * Gets accounts

@@ -1655,8 +1655,10 @@ class AggregatedInfoApi
      * if needed, use the 'variables' parameter to pass variables to the host.
      * URL: https://aisp-api.blockmate.io
      *
-     * @param  \DateTime $since Set time from which the transactions will be get. The parameter is passed as-is to backend services. The default value is 30 days before the actual date or 30 days before the date specified in \&quot;until\&quot; parameter. (optional)
-     * @param  \DateTime $until Set time to which the transactions will be get. The parameter is passed as-is to backend services. The default value is the actual date. (optional)
+     * @param  \DateTime $since Set time from which the transactions will be get. (optional)
+     * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
+     * @param  float $limit Limit the number of the transactions in the response. Default page size is 50. (optional)
+     * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
      * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
@@ -1666,9 +1668,9 @@ class AggregatedInfoApi
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\Transactions200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function transactions($since = null, $until = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactions($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
     {
-        list($response) = $this->transactionsWithHttpInfo($since, $until, $currency, $account_filter, $hostIndex, $variables);
+        list($response) = $this->transactionsWithHttpInfo($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables);
         return $response;
     }
 
@@ -1681,8 +1683,10 @@ class AggregatedInfoApi
      * if needed, use the 'variables' parameter to pass variables to the host.
      * URL: https://aisp-api.blockmate.io
      *
-     * @param  \DateTime $since Set time from which the transactions will be get. The parameter is passed as-is to backend services. The default value is 30 days before the actual date or 30 days before the date specified in \&quot;until\&quot; parameter. (optional)
-     * @param  \DateTime $until Set time to which the transactions will be get. The parameter is passed as-is to backend services. The default value is the actual date. (optional)
+     * @param  \DateTime $since Set time from which the transactions will be get. (optional)
+     * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
+     * @param  float $limit Limit the number of the transactions in the response. Default page size is 50. (optional)
+     * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
      * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
@@ -1692,9 +1696,9 @@ class AggregatedInfoApi
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\Transactions200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function transactionsWithHttpInfo($since = null, $until = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactionsWithHttpInfo($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
     {
-        $request = $this->transactionsRequest($since, $until, $currency, $account_filter, $hostIndex, $variables);
+        $request = $this->transactionsRequest($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1847,8 +1851,10 @@ class AggregatedInfoApi
      * if needed, use the 'variables' parameter to pass variables to the host.
      * URL: https://aisp-api.blockmate.io
      *
-     * @param  \DateTime $since Set time from which the transactions will be get. The parameter is passed as-is to backend services. The default value is 30 days before the actual date or 30 days before the date specified in \&quot;until\&quot; parameter. (optional)
-     * @param  \DateTime $until Set time to which the transactions will be get. The parameter is passed as-is to backend services. The default value is the actual date. (optional)
+     * @param  \DateTime $since Set time from which the transactions will be get. (optional)
+     * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
+     * @param  float $limit Limit the number of the transactions in the response. Default page size is 50. (optional)
+     * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
      * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
@@ -1857,9 +1863,9 @@ class AggregatedInfoApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function transactionsAsync($since = null, $until = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactionsAsync($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
     {
-        return $this->transactionsAsyncWithHttpInfo($since, $until, $currency, $account_filter, $hostIndex, $variables)
+        return $this->transactionsAsyncWithHttpInfo($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1876,8 +1882,10 @@ class AggregatedInfoApi
      * if needed, use the 'variables' parameter to pass variables to the host.
      * URL: https://aisp-api.blockmate.io
      *
-     * @param  \DateTime $since Set time from which the transactions will be get. The parameter is passed as-is to backend services. The default value is 30 days before the actual date or 30 days before the date specified in \&quot;until\&quot; parameter. (optional)
-     * @param  \DateTime $until Set time to which the transactions will be get. The parameter is passed as-is to backend services. The default value is the actual date. (optional)
+     * @param  \DateTime $since Set time from which the transactions will be get. (optional)
+     * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
+     * @param  float $limit Limit the number of the transactions in the response. Default page size is 50. (optional)
+     * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
      * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
@@ -1886,10 +1894,10 @@ class AggregatedInfoApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function transactionsAsyncWithHttpInfo($since = null, $until = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactionsAsyncWithHttpInfo($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
     {
         $returnType = '\blockmate\Model\Transactions200Response';
-        $request = $this->transactionsRequest($since, $until, $currency, $account_filter, $hostIndex, $variables);
+        $request = $this->transactionsRequest($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1934,8 +1942,10 @@ class AggregatedInfoApi
     * if needed, use the 'variables' parameter to pass variables to the host.
      * URL: https://aisp-api.blockmate.io
      *
-     * @param  \DateTime $since Set time from which the transactions will be get. The parameter is passed as-is to backend services. The default value is 30 days before the actual date or 30 days before the date specified in \&quot;until\&quot; parameter. (optional)
-     * @param  \DateTime $until Set time to which the transactions will be get. The parameter is passed as-is to backend services. The default value is the actual date. (optional)
+     * @param  \DateTime $since Set time from which the transactions will be get. (optional)
+     * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
+     * @param  float $limit Limit the number of the transactions in the response. Default page size is 50. (optional)
+     * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
      * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
@@ -1944,7 +1954,7 @@ class AggregatedInfoApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function transactionsRequest($since = null, $until = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactionsRequest($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
     {
 
         if ($since !== null && !preg_match("/^[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/", $since)) {
@@ -1955,6 +1965,8 @@ class AggregatedInfoApi
         if ($until !== null && !preg_match("/^[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/", $until)) {
             throw new \InvalidArgumentException("invalid value for \"until\" when calling AggregatedInfoApi.transactions, must conform to the pattern /^[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/.");
         }
+
+
 
 
 
@@ -1979,6 +1991,24 @@ class AggregatedInfoApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $until,
             'until', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $cursor,
+            'cursor', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
