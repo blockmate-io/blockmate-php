@@ -87,6 +87,7 @@ Class | Method | HTTP request | Description
 *AggregatedInfoApi* | [**accountProvidersList**](docs/Api/AggregatedInfoApi.md#accountproviderslist) | **GET** /v1/aggregate/account_providers | Get list of account providers
 *AggregatedInfoApi* | [**accounts**](docs/Api/AggregatedInfoApi.md#accounts) | **GET** /v1/aggregate/accounts | List accounts
 *AggregatedInfoApi* | [**balance**](docs/Api/AggregatedInfoApi.md#balance) | **GET** /v1/aggregate/balance | Get balance
+*AggregatedInfoApi* | [**nFTMetadata**](docs/Api/AggregatedInfoApi.md#nftmetadata) | **GET** /v1/aggregate/nft_metadata | Get NFT metadata
 *AggregatedInfoApi* | [**transactions**](docs/Api/AggregatedInfoApi.md#transactions) | **GET** /v1/aggregate/transactions | Get transactions
 *AuthenticationApi* | [**userAPIAuthenticateDeveloper**](docs/Api/AuthenticationApi.md#userapiauthenticatedeveloper) | **GET** /v1/auth/developer | Authenticate developer
 *AuthenticationApi* | [**userAPIAuthenticateProject**](docs/Api/AuthenticationApi.md#userapiauthenticateproject) | **GET** /v1/auth | Authenticate project
@@ -136,7 +137,19 @@ Class | Method | HTTP request | Description
 - [GetAddressRiskScore200Response](docs/Model/GetAddressRiskScore200Response.md)
 - [GetTransactionRiskScore200Response](docs/Model/GetTransactionRiskScore200Response.md)
 - [GetUser404Response](docs/Model/GetUser404Response.md)
+- [Metadata](docs/Model/Metadata.md)
+- [MetadataAttributesInner](docs/Model/MetadataAttributesInner.md)
 - [Movement](docs/Model/Movement.md)
+- [NFTMetadata200ResponseValue](docs/Model/NFTMetadata200ResponseValue.md)
+- [NftContractMetadata](docs/Model/NftContractMetadata.md)
+- [NftId](docs/Model/NftId.md)
+- [NftIdTokenMetadata](docs/Model/NftIdTokenMetadata.md)
+- [NftMedia](docs/Model/NftMedia.md)
+- [NftSpamInfo](docs/Model/NftSpamInfo.md)
+- [NftTokenUri](docs/Model/NftTokenUri.md)
+- [OwnedNft](docs/Model/OwnedNft.md)
+- [OwnedNftContract](docs/Model/OwnedNftContract.md)
+- [OwnedNftMedia](docs/Model/OwnedNftMedia.md)
 - [RiskReportCategory](docs/Model/RiskReportCategory.md)
 - [Transaction](docs/Model/Transaction.md)
 - [TransactionRiskReport](docs/Model/TransactionRiskReport.md)

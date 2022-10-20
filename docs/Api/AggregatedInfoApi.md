@@ -8,6 +8,7 @@ All URIs are relative to http://localhost, except if the operation defines anoth
 | [**accountProvidersList()**](AggregatedInfoApi.md#accountProvidersList) | **GET** /v1/aggregate/account_providers | Get list of account providers |
 | [**accounts()**](AggregatedInfoApi.md#accounts) | **GET** /v1/aggregate/accounts | List accounts |
 | [**balance()**](AggregatedInfoApi.md#balance) | **GET** /v1/aggregate/balance | Get balance |
+| [**nFTMetadata()**](AggregatedInfoApi.md#nFTMetadata) | **GET** /v1/aggregate/nft_metadata | Get NFT metadata |
 | [**transactions()**](AggregatedInfoApi.md#transactions) | **GET** /v1/aggregate/transactions | Get transactions |
 
 
@@ -248,6 +249,68 @@ try {
 ### Return type
 
 [**\blockmate\Model\Balance200Response**](../Model/Balance200Response.md)
+
+### Authorization
+
+[UserJWT](../../README.md#UserJWT)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `nFTMetadata()`
+
+```php
+nFTMetadata(): array<string,\blockmate\Model\NFTMetadata200ResponseValue>
+```
+### URI(s):
+- https://aisp-api.blockmate.io Call
+Get NFT metadata
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: UserJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new blockmate\Api\AggregatedInfoApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+$hostIndex = 0;
+$variables = [
+];
+
+try {
+    $result = $apiInstance->nFTMetadata($hostIndex, $variables);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AggregatedInfoApi->nFTMetadata: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
+| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
+
+### Return type
+
+[**array<string,\blockmate\Model\NFTMetadata200ResponseValue>**](../Model/NFTMetadata200ResponseValue.md)
 
 ### Authorization
 
