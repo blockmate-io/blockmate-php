@@ -120,22 +120,16 @@ class RiskInfoApi
      *
      * Get address risk score
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\GetAddressRiskScore200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getAddressRiskScore($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScore($address = null, $chain = null)
     {
-        list($response) = $this->getAddressRiskScoreWithHttpInfo($address, $chain, $hostIndex, $variables);
+        list($response) = $this->getAddressRiskScoreWithHttpInfo($address, $chain);
         return $response;
     }
 
@@ -144,22 +138,16 @@ class RiskInfoApi
      *
      * Get address risk score
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\GetAddressRiskScore200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAddressRiskScoreWithHttpInfo($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreWithHttpInfo($address = null, $chain = null)
     {
-        $request = $this->getAddressRiskScoreRequest($address, $chain, $hostIndex, $variables);
+        $request = $this->getAddressRiskScoreRequest($address, $chain);
 
         try {
             $options = $this->createHttpClientOption();
@@ -308,21 +296,15 @@ class RiskInfoApi
      *
      * Get address risk score
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressRiskScoreAsync($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreAsync($address = null, $chain = null)
     {
-        return $this->getAddressRiskScoreAsyncWithHttpInfo($address, $chain, $hostIndex, $variables)
+        return $this->getAddressRiskScoreAsyncWithHttpInfo($address, $chain)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -335,22 +317,16 @@ class RiskInfoApi
      *
      * Get address risk score
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressRiskScoreAsyncWithHttpInfo($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreAsyncWithHttpInfo($address = null, $chain = null)
     {
         $returnType = '\blockmate\Model\GetAddressRiskScore200Response';
-        $request = $this->getAddressRiskScoreRequest($address, $chain, $hostIndex, $variables);
+        $request = $this->getAddressRiskScoreRequest($address, $chain);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -391,19 +367,13 @@ class RiskInfoApi
     /**
      * Create request for operation 'getAddressRiskScore'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAddressRiskScoreRequest($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreRequest($address = null, $chain = null)
     {
 
 
@@ -489,17 +459,7 @@ class RiskInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetAddressRiskScore();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -510,40 +470,19 @@ class RiskInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation getAddressRiskScore
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetAddressRiskScore(): array
-    {
-        return [
-            [
-                "url" => "https://risk-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation getAddressRiskScoreCase
      *
      * Get address risk score case
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\AddressRiskReport|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getAddressRiskScoreCase($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreCase($case_id)
     {
-        list($response) = $this->getAddressRiskScoreCaseWithHttpInfo($case_id, $hostIndex, $variables);
+        list($response) = $this->getAddressRiskScoreCaseWithHttpInfo($case_id);
         return $response;
     }
 
@@ -552,21 +491,15 @@ class RiskInfoApi
      *
      * Get address risk score case
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\AddressRiskReport|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAddressRiskScoreCaseWithHttpInfo($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreCaseWithHttpInfo($case_id)
     {
-        $request = $this->getAddressRiskScoreCaseRequest($case_id, $hostIndex, $variables);
+        $request = $this->getAddressRiskScoreCaseRequest($case_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -715,20 +648,14 @@ class RiskInfoApi
      *
      * Get address risk score case
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressRiskScoreCaseAsync($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreCaseAsync($case_id)
     {
-        return $this->getAddressRiskScoreCaseAsyncWithHttpInfo($case_id, $hostIndex, $variables)
+        return $this->getAddressRiskScoreCaseAsyncWithHttpInfo($case_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -741,21 +668,15 @@ class RiskInfoApi
      *
      * Get address risk score case
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressRiskScoreCaseAsyncWithHttpInfo($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreCaseAsyncWithHttpInfo($case_id)
     {
         $returnType = '\blockmate\Model\AddressRiskReport';
-        $request = $this->getAddressRiskScoreCaseRequest($case_id, $hostIndex, $variables);
+        $request = $this->getAddressRiskScoreCaseRequest($case_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -796,18 +717,12 @@ class RiskInfoApi
     /**
      * Create request for operation 'getAddressRiskScoreCase'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAddressRiskScoreCaseRequest($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreCaseRequest($case_id)
     {
 
         // verify the required parameter 'case_id' is set
@@ -888,17 +803,7 @@ class RiskInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetAddressRiskScoreCase();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -909,41 +814,20 @@ class RiskInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation getAddressRiskScoreCase
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetAddressRiskScoreCase(): array
-    {
-        return [
-            [
-                "url" => "https://risk-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation getAddressRiskScoreDetails
      *
      * Get address risk score details
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\AddressRiskReport|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getAddressRiskScoreDetails($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreDetails($address = null, $chain = null)
     {
-        list($response) = $this->getAddressRiskScoreDetailsWithHttpInfo($address, $chain, $hostIndex, $variables);
+        list($response) = $this->getAddressRiskScoreDetailsWithHttpInfo($address, $chain);
         return $response;
     }
 
@@ -952,22 +836,16 @@ class RiskInfoApi
      *
      * Get address risk score details
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\AddressRiskReport|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAddressRiskScoreDetailsWithHttpInfo($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreDetailsWithHttpInfo($address = null, $chain = null)
     {
-        $request = $this->getAddressRiskScoreDetailsRequest($address, $chain, $hostIndex, $variables);
+        $request = $this->getAddressRiskScoreDetailsRequest($address, $chain);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1116,21 +994,15 @@ class RiskInfoApi
      *
      * Get address risk score details
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressRiskScoreDetailsAsync($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreDetailsAsync($address = null, $chain = null)
     {
-        return $this->getAddressRiskScoreDetailsAsyncWithHttpInfo($address, $chain, $hostIndex, $variables)
+        return $this->getAddressRiskScoreDetailsAsyncWithHttpInfo($address, $chain)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1143,22 +1015,16 @@ class RiskInfoApi
      *
      * Get address risk score details
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressRiskScoreDetailsAsyncWithHttpInfo($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreDetailsAsyncWithHttpInfo($address = null, $chain = null)
     {
         $returnType = '\blockmate\Model\AddressRiskReport';
-        $request = $this->getAddressRiskScoreDetailsRequest($address, $chain, $hostIndex, $variables);
+        $request = $this->getAddressRiskScoreDetailsRequest($address, $chain);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1199,19 +1065,13 @@ class RiskInfoApi
     /**
      * Create request for operation 'getAddressRiskScoreDetails'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $address Address for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAddressRiskScoreDetailsRequest($address = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getAddressRiskScoreDetailsRequest($address = null, $chain = null)
     {
 
 
@@ -1297,17 +1157,7 @@ class RiskInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetAddressRiskScoreDetails();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -1318,41 +1168,20 @@ class RiskInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation getAddressRiskScoreDetails
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetAddressRiskScoreDetails(): array
-    {
-        return [
-            [
-                "url" => "https://risk-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation getTransactionRiskScore
      *
      * Get transaction risk score
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\GetTransactionRiskScore200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getTransactionRiskScore($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScore($transaction = null, $chain = null)
     {
-        list($response) = $this->getTransactionRiskScoreWithHttpInfo($transaction, $chain, $hostIndex, $variables);
+        list($response) = $this->getTransactionRiskScoreWithHttpInfo($transaction, $chain);
         return $response;
     }
 
@@ -1361,22 +1190,16 @@ class RiskInfoApi
      *
      * Get transaction risk score
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\GetTransactionRiskScore200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getTransactionRiskScoreWithHttpInfo($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreWithHttpInfo($transaction = null, $chain = null)
     {
-        $request = $this->getTransactionRiskScoreRequest($transaction, $chain, $hostIndex, $variables);
+        $request = $this->getTransactionRiskScoreRequest($transaction, $chain);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1525,21 +1348,15 @@ class RiskInfoApi
      *
      * Get transaction risk score
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTransactionRiskScoreAsync($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreAsync($transaction = null, $chain = null)
     {
-        return $this->getTransactionRiskScoreAsyncWithHttpInfo($transaction, $chain, $hostIndex, $variables)
+        return $this->getTransactionRiskScoreAsyncWithHttpInfo($transaction, $chain)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1552,22 +1369,16 @@ class RiskInfoApi
      *
      * Get transaction risk score
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTransactionRiskScoreAsyncWithHttpInfo($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreAsyncWithHttpInfo($transaction = null, $chain = null)
     {
         $returnType = '\blockmate\Model\GetTransactionRiskScore200Response';
-        $request = $this->getTransactionRiskScoreRequest($transaction, $chain, $hostIndex, $variables);
+        $request = $this->getTransactionRiskScoreRequest($transaction, $chain);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1608,19 +1419,13 @@ class RiskInfoApi
     /**
      * Create request for operation 'getTransactionRiskScore'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getTransactionRiskScoreRequest($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreRequest($transaction = null, $chain = null)
     {
 
 
@@ -1706,17 +1511,7 @@ class RiskInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetTransactionRiskScore();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -1727,40 +1522,19 @@ class RiskInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation getTransactionRiskScore
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetTransactionRiskScore(): array
-    {
-        return [
-            [
-                "url" => "https://risk-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation getTransactionRiskScoreCase
      *
      * Get transaction risk score case
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\TransactionRiskReport|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getTransactionRiskScoreCase($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreCase($case_id)
     {
-        list($response) = $this->getTransactionRiskScoreCaseWithHttpInfo($case_id, $hostIndex, $variables);
+        list($response) = $this->getTransactionRiskScoreCaseWithHttpInfo($case_id);
         return $response;
     }
 
@@ -1769,21 +1543,15 @@ class RiskInfoApi
      *
      * Get transaction risk score case
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\TransactionRiskReport|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getTransactionRiskScoreCaseWithHttpInfo($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreCaseWithHttpInfo($case_id)
     {
-        $request = $this->getTransactionRiskScoreCaseRequest($case_id, $hostIndex, $variables);
+        $request = $this->getTransactionRiskScoreCaseRequest($case_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1932,20 +1700,14 @@ class RiskInfoApi
      *
      * Get transaction risk score case
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTransactionRiskScoreCaseAsync($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreCaseAsync($case_id)
     {
-        return $this->getTransactionRiskScoreCaseAsyncWithHttpInfo($case_id, $hostIndex, $variables)
+        return $this->getTransactionRiskScoreCaseAsyncWithHttpInfo($case_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1958,21 +1720,15 @@ class RiskInfoApi
      *
      * Get transaction risk score case
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTransactionRiskScoreCaseAsyncWithHttpInfo($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreCaseAsyncWithHttpInfo($case_id)
     {
         $returnType = '\blockmate\Model\TransactionRiskReport';
-        $request = $this->getTransactionRiskScoreCaseRequest($case_id, $hostIndex, $variables);
+        $request = $this->getTransactionRiskScoreCaseRequest($case_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2013,18 +1769,12 @@ class RiskInfoApi
     /**
      * Create request for operation 'getTransactionRiskScoreCase'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $case_id Case identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getTransactionRiskScoreCaseRequest($case_id, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreCaseRequest($case_id)
     {
 
         // verify the required parameter 'case_id' is set
@@ -2105,17 +1855,7 @@ class RiskInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetTransactionRiskScoreCase();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -2126,41 +1866,20 @@ class RiskInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation getTransactionRiskScoreCase
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetTransactionRiskScoreCase(): array
-    {
-        return [
-            [
-                "url" => "https://risk-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation getTransactionRiskScoreDetails
      *
      * Get transaction risk score details
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\TransactionRiskReport|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getTransactionRiskScoreDetails($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreDetails($transaction = null, $chain = null)
     {
-        list($response) = $this->getTransactionRiskScoreDetailsWithHttpInfo($transaction, $chain, $hostIndex, $variables);
+        list($response) = $this->getTransactionRiskScoreDetailsWithHttpInfo($transaction, $chain);
         return $response;
     }
 
@@ -2169,22 +1888,16 @@ class RiskInfoApi
      *
      * Get transaction risk score details
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\TransactionRiskReport|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getTransactionRiskScoreDetailsWithHttpInfo($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreDetailsWithHttpInfo($transaction = null, $chain = null)
     {
-        $request = $this->getTransactionRiskScoreDetailsRequest($transaction, $chain, $hostIndex, $variables);
+        $request = $this->getTransactionRiskScoreDetailsRequest($transaction, $chain);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2333,21 +2046,15 @@ class RiskInfoApi
      *
      * Get transaction risk score details
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTransactionRiskScoreDetailsAsync($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreDetailsAsync($transaction = null, $chain = null)
     {
-        return $this->getTransactionRiskScoreDetailsAsyncWithHttpInfo($transaction, $chain, $hostIndex, $variables)
+        return $this->getTransactionRiskScoreDetailsAsyncWithHttpInfo($transaction, $chain)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2360,22 +2067,16 @@ class RiskInfoApi
      *
      * Get transaction risk score details
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTransactionRiskScoreDetailsAsyncWithHttpInfo($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreDetailsAsyncWithHttpInfo($transaction = null, $chain = null)
     {
         $returnType = '\blockmate\Model\TransactionRiskReport';
-        $request = $this->getTransactionRiskScoreDetailsRequest($transaction, $chain, $hostIndex, $variables);
+        $request = $this->getTransactionRiskScoreDetailsRequest($transaction, $chain);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2416,19 +2117,13 @@ class RiskInfoApi
     /**
      * Create request for operation 'getTransactionRiskScoreDetails'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://risk-api.blockmate.io
-     *
      * @param  string $transaction Transaction hash for which risk should be returned (optional)
      * @param  string $chain Blockchain identifier (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getTransactionRiskScoreDetailsRequest($transaction = null, $chain = null, ?int $hostIndex = null, array $variables = [])
+    public function getTransactionRiskScoreDetailsRequest($transaction = null, $chain = null)
     {
 
 
@@ -2514,17 +2209,7 @@ class RiskInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetTransactionRiskScoreDetails();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -2532,21 +2217,6 @@ class RiskInfoApi
             $headers,
             $httpBody
         );
-    }
-
-    /**
-     * Returns an array of host settings for Operation getTransactionRiskScoreDetails
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetTransactionRiskScoreDetails(): array
-    {
-        return [
-            [
-                "url" => "https://risk-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
     }
 
     /**

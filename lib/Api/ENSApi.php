@@ -1,6 +1,6 @@
 <?php
 /**
- * AccountProviderInfoApi
+ * ENSApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use blockmate\HeaderSelector;
 use blockmate\ObjectSerializer;
 
 /**
- * AccountProviderInfoApi Class Doc Comment
+ * ENSApi Class Doc Comment
  *
  * @category Class
  * @package  blockmate
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AccountProviderInfoApi
+class ENSApi
 {
     /**
      * @var ClientInterface
@@ -116,38 +116,36 @@ class AccountProviderInfoApi
     }
 
     /**
-     * Operation connectAccount
+     * Operation getAddressFromDomain
      *
-     * Connect new account
+     * Get address for specified ENS domain
      *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
+     * @param  string $domain ENS domain for which Ethereum address should be returned (required)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \blockmate\Model\ConnectAccount200Response|\blockmate\Model\ConnectAccount400Response|\blockmate\Model\GetAccountHint403Response|\blockmate\Model\ConnectAccount405Response
+     * @return \blockmate\Model\GetAddressFromDomain200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function connectAccount($account_provider, $connect_account_request = null)
+    public function getAddressFromDomain($domain)
     {
-        list($response) = $this->connectAccountWithHttpInfo($account_provider, $connect_account_request);
+        list($response) = $this->getAddressFromDomainWithHttpInfo($domain);
         return $response;
     }
 
     /**
-     * Operation connectAccountWithHttpInfo
+     * Operation getAddressFromDomainWithHttpInfo
      *
-     * Connect new account
+     * Get address for specified ENS domain
      *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
+     * @param  string $domain ENS domain for which Ethereum address should be returned (required)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \blockmate\Model\ConnectAccount200Response|\blockmate\Model\ConnectAccount400Response|\blockmate\Model\GetAccountHint403Response|\blockmate\Model\ConnectAccount405Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \blockmate\Model\GetAddressFromDomain200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function connectAccountWithHttpInfo($account_provider, $connect_account_request = null)
+    public function getAddressFromDomainWithHttpInfo($domain)
     {
-        $request = $this->connectAccountRequest($account_provider, $connect_account_request);
+        $request = $this->getAddressFromDomainRequest($domain);
 
         try {
             $options = $this->createHttpClientOption();
@@ -187,75 +185,58 @@ class AccountProviderInfoApi
             switch($statusCode) {
             
                 case 200:
-                    if ('\blockmate\Model\ConnectAccount200Response' === '\SplFileObject') {
+                    if ('\blockmate\Model\GetAddressFromDomain200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\ConnectAccount200Response' !== 'string') {
+                        if ('\blockmate\Model\GetAddressFromDomain200Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\ConnectAccount200Response', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAddressFromDomain200Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             
             
                 case 400:
-                    if ('\blockmate\Model\ConnectAccount400Response' === '\SplFileObject') {
+                    if ('\blockmate\Model\UserAPIAuthenticateProject400Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\ConnectAccount400Response' !== 'string') {
+                        if ('\blockmate\Model\UserAPIAuthenticateProject400Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\ConnectAccount400Response', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject400Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             
             
-                case 403:
-                    if ('\blockmate\Model\GetAccountHint403Response' === '\SplFileObject') {
+                case 401:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject401Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\GetAccountHint403Response' !== 'string') {
+                        if ('\blockmate\Model\UserAPIAuthenticateProject401Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAccountHint403Response', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            
-            
-                case 405:
-                    if ('\blockmate\Model\ConnectAccount405Response' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\blockmate\Model\ConnectAccount405Response' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\ConnectAccount405Response', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject401Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             
             }
 
-            $returnType = '\blockmate\Model\ConnectAccount200Response';
+            $returnType = '\blockmate\Model\GetAddressFromDomain200Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -277,7 +258,7 @@ class AccountProviderInfoApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\ConnectAccount200Response',
+                        '\blockmate\Model\GetAddressFromDomain200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -287,27 +268,17 @@ class AccountProviderInfoApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\ConnectAccount400Response',
+                        '\blockmate\Model\UserAPIAuthenticateProject400Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
             
             
-                case 403:
+                case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\GetAccountHint403Response',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            
-            
-                case 405:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\blockmate\Model\ConnectAccount405Response',
+                        '\blockmate\Model\UserAPIAuthenticateProject401Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -319,19 +290,18 @@ class AccountProviderInfoApi
     }
 
     /**
-     * Operation connectAccountAsync
+     * Operation getAddressFromDomainAsync
      *
-     * Connect new account
+     * Get address for specified ENS domain
      *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
+     * @param  string $domain ENS domain for which Ethereum address should be returned (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function connectAccountAsync($account_provider, $connect_account_request = null)
+    public function getAddressFromDomainAsync($domain)
     {
-        return $this->connectAccountAsyncWithHttpInfo($account_provider, $connect_account_request)
+        return $this->getAddressFromDomainAsyncWithHttpInfo($domain)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -340,20 +310,19 @@ class AccountProviderInfoApi
     }
 
     /**
-     * Operation connectAccountAsyncWithHttpInfo
+     * Operation getAddressFromDomainAsyncWithHttpInfo
      *
-     * Connect new account
+     * Get address for specified ENS domain
      *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
+     * @param  string $domain ENS domain for which Ethereum address should be returned (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function connectAccountAsyncWithHttpInfo($account_provider, $connect_account_request = null)
+    public function getAddressFromDomainAsyncWithHttpInfo($domain)
     {
-        $returnType = '\blockmate\Model\ConnectAccount200Response';
-        $request = $this->connectAccountRequest($account_provider, $connect_account_request);
+        $returnType = '\blockmate\Model\GetAddressFromDomain200Response';
+        $request = $this->getAddressFromDomainRequest($domain);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -392,322 +361,41 @@ class AccountProviderInfoApi
     }
 
     /**
-     * Create request for operation 'connectAccount'
+     * Create request for operation 'getAddressFromDomain'
      *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
+     * @param  string $domain ENS domain for which Ethereum address should be returned (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function connectAccountRequest($account_provider, $connect_account_request = null)
+    public function getAddressFromDomainRequest($domain)
     {
 
-        // verify the required parameter 'account_provider' is set
-        if ($account_provider === null || (is_array($account_provider) && count($account_provider) === 0)) {
+        // verify the required parameter 'domain' is set
+        if ($domain === null || (is_array($domain) && count($domain) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $account_provider when calling connectAccount'
+                'Missing the required parameter $domain when calling getAddressFromDomain'
             );
         }
 
-
-        $resourcePath = '/v1/{account_provider}/connect';
+        $resourcePath = '/v1/ens/addressFromDomain';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $domain,
+            'domain', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
 
 
-        // path params
-        if ($account_provider !== null) {
-            $resourcePath = str_replace(
-                '{' . 'account_provider' . '}',
-                ObjectSerializer::toPathValue($account_provider),
-                $resourcePath
-            );
-        }
-
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($connect_account_request)) {
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($connect_account_request));
-            } else {
-                $httpBody = $connect_account_request;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation deleteAccount
-     *
-     * Delete account
-     *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  string $account_id Account ID (required)
-     *
-     * @throws \blockmate\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function deleteAccount($account_provider, $account_id)
-    {
-        $this->deleteAccountWithHttpInfo($account_provider, $account_id);
-    }
-
-    /**
-     * Operation deleteAccountWithHttpInfo
-     *
-     * Delete account
-     *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  string $account_id Account ID (required)
-     *
-     * @throws \blockmate\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function deleteAccountWithHttpInfo($account_provider, $account_id)
-    {
-        $request = $this->deleteAccountRequest($account_provider, $account_id);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            
-            
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\blockmate\Model\GetAccountHint403Response',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            
-            
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\blockmate\Model\DeleteAccount404Response',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation deleteAccountAsync
-     *
-     * Delete account
-     *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  string $account_id Account ID (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function deleteAccountAsync($account_provider, $account_id)
-    {
-        return $this->deleteAccountAsyncWithHttpInfo($account_provider, $account_id)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation deleteAccountAsyncWithHttpInfo
-     *
-     * Delete account
-     *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  string $account_id Account ID (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function deleteAccountAsyncWithHttpInfo($account_provider, $account_id)
-    {
-        $returnType = '';
-        $request = $this->deleteAccountRequest($account_provider, $account_id);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'deleteAccount'
-     *
-     * @param  string $account_provider URL value from account_providers method (required)
-     * @param  string $account_id Account ID (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function deleteAccountRequest($account_provider, $account_id)
-    {
-
-        // verify the required parameter 'account_provider' is set
-        if ($account_provider === null || (is_array($account_provider) && count($account_provider) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $account_provider when calling deleteAccount'
-            );
-        }
-
-        // verify the required parameter 'account_id' is set
-        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $account_id when calling deleteAccount'
-            );
-        }
-
-        $resourcePath = '/v1/{account_provider}/account/{account_id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($account_provider !== null) {
-            $resourcePath = str_replace(
-                '{' . 'account_provider' . '}',
-                ObjectSerializer::toPathValue($account_provider),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($account_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'account_id' . '}',
-                ObjectSerializer::toPathValue($account_id),
-                $resourcePath
-            );
-        }
 
 
         if ($multipart) {
@@ -765,7 +453,7 @@ class AccountProviderInfoApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'DELETE',
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -773,36 +461,36 @@ class AccountProviderInfoApi
     }
 
     /**
-     * Operation getAccountHint
+     * Operation getDomainFromAddress
      *
-     * Get account hint
+     * Get domain and metadata for specified ENS address
      *
-     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $address Ethereum address for which domain and metadata should be returned (required)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \blockmate\Model\GetAccountHint200Response|\blockmate\Model\GetAccountHint403Response|\blockmate\Model\GetAccountHint404Response
+     * @return \blockmate\Model\GetDomainFromAddress200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getAccountHint($account_provider)
+    public function getDomainFromAddress($address)
     {
-        list($response) = $this->getAccountHintWithHttpInfo($account_provider);
+        list($response) = $this->getDomainFromAddressWithHttpInfo($address);
         return $response;
     }
 
     /**
-     * Operation getAccountHintWithHttpInfo
+     * Operation getDomainFromAddressWithHttpInfo
      *
-     * Get account hint
+     * Get domain and metadata for specified ENS address
      *
-     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $address Ethereum address for which domain and metadata should be returned (required)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \blockmate\Model\GetAccountHint200Response|\blockmate\Model\GetAccountHint403Response|\blockmate\Model\GetAccountHint404Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \blockmate\Model\GetDomainFromAddress200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAccountHintWithHttpInfo($account_provider)
+    public function getDomainFromAddressWithHttpInfo($address)
     {
-        $request = $this->getAccountHintRequest($account_provider);
+        $request = $this->getDomainFromAddressRequest($address);
 
         try {
             $options = $this->createHttpClientOption();
@@ -842,58 +530,58 @@ class AccountProviderInfoApi
             switch($statusCode) {
             
                 case 200:
-                    if ('\blockmate\Model\GetAccountHint200Response' === '\SplFileObject') {
+                    if ('\blockmate\Model\GetDomainFromAddress200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\GetAccountHint200Response' !== 'string') {
+                        if ('\blockmate\Model\GetDomainFromAddress200Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAccountHint200Response', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetDomainFromAddress200Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             
             
-                case 403:
-                    if ('\blockmate\Model\GetAccountHint403Response' === '\SplFileObject') {
+                case 400:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject400Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\GetAccountHint403Response' !== 'string') {
+                        if ('\blockmate\Model\UserAPIAuthenticateProject400Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAccountHint403Response', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject400Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             
             
-                case 404:
-                    if ('\blockmate\Model\GetAccountHint404Response' === '\SplFileObject') {
+                case 401:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject401Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\GetAccountHint404Response' !== 'string') {
+                        if ('\blockmate\Model\UserAPIAuthenticateProject401Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAccountHint404Response', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject401Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             
             }
 
-            $returnType = '\blockmate\Model\GetAccountHint200Response';
+            $returnType = '\blockmate\Model\GetDomainFromAddress200Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -915,27 +603,27 @@ class AccountProviderInfoApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\GetAccountHint200Response',
+                        '\blockmate\Model\GetDomainFromAddress200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
             
             
-                case 403:
+                case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\GetAccountHint403Response',
+                        '\blockmate\Model\UserAPIAuthenticateProject400Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
             
             
-                case 404:
+                case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\GetAccountHint404Response',
+                        '\blockmate\Model\UserAPIAuthenticateProject401Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -947,18 +635,18 @@ class AccountProviderInfoApi
     }
 
     /**
-     * Operation getAccountHintAsync
+     * Operation getDomainFromAddressAsync
      *
-     * Get account hint
+     * Get domain and metadata for specified ENS address
      *
-     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $address Ethereum address for which domain and metadata should be returned (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountHintAsync($account_provider)
+    public function getDomainFromAddressAsync($address)
     {
-        return $this->getAccountHintAsyncWithHttpInfo($account_provider)
+        return $this->getDomainFromAddressAsyncWithHttpInfo($address)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -967,19 +655,19 @@ class AccountProviderInfoApi
     }
 
     /**
-     * Operation getAccountHintAsyncWithHttpInfo
+     * Operation getDomainFromAddressAsyncWithHttpInfo
      *
-     * Get account hint
+     * Get domain and metadata for specified ENS address
      *
-     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $address Ethereum address for which domain and metadata should be returned (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountHintAsyncWithHttpInfo($account_provider)
+    public function getDomainFromAddressAsyncWithHttpInfo($address)
     {
-        $returnType = '\blockmate\Model\GetAccountHint200Response';
-        $request = $this->getAccountHintRequest($account_provider);
+        $returnType = '\blockmate\Model\GetDomainFromAddress200Response';
+        $request = $this->getDomainFromAddressRequest($address);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1018,40 +706,41 @@ class AccountProviderInfoApi
     }
 
     /**
-     * Create request for operation 'getAccountHint'
+     * Create request for operation 'getDomainFromAddress'
      *
-     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $address Ethereum address for which domain and metadata should be returned (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAccountHintRequest($account_provider)
+    public function getDomainFromAddressRequest($address)
     {
 
-        // verify the required parameter 'account_provider' is set
-        if ($account_provider === null || (is_array($account_provider) && count($account_provider) === 0)) {
+        // verify the required parameter 'address' is set
+        if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $account_provider when calling getAccountHint'
+                'Missing the required parameter $address when calling getDomainFromAddress'
             );
         }
 
-        $resourcePath = '/v1/{account_provider}/connect';
+        $resourcePath = '/v1/ens/domainFromAddress';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $address,
+            'address', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
 
 
-        // path params
-        if ($account_provider !== null) {
-            $resourcePath = str_replace(
-                '{' . 'account_provider' . '}',
-                ObjectSerializer::toPathValue($account_provider),
-                $resourcePath
-            );
-        }
 
 
         if ($multipart) {

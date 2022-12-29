@@ -1,6 +1,6 @@
 # blockmate\AccountProviderInfoApi
 
-All URIs are relative to http://localhost, except if the operation defines another base path.
+All URIs are relative to https://api.blockmate.io, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
@@ -14,8 +14,7 @@ All URIs are relative to http://localhost, except if the operation defines anoth
 ```php
 connectAccount($account_provider, $connect_account_request): \blockmate\Model\ConnectAccount200Response
 ```
-### URI(s):
-- https://aisp-api.blockmate.io Call
+
 Connect new account
 
 ### Example
@@ -40,12 +39,8 @@ $apiInstance = new blockmate\Api\AccountProviderInfoApi(
 $account_provider = onchain/btc; // string | URL value from account_providers method
 $connect_account_request = new \blockmate\Model\ConnectAccountRequest(); // \blockmate\Model\ConnectAccountRequest | OK
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->connectAccount($account_provider, $connect_account_request, $hostIndex, $variables);
+    $result = $apiInstance->connectAccount($account_provider, $connect_account_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AccountProviderInfoApi->connectAccount: ', $e->getMessage(), PHP_EOL;
@@ -58,8 +53,6 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **account_provider** | **string**| URL value from account_providers method | |
 | **connect_account_request** | [**\blockmate\Model\ConnectAccountRequest**](../Model/ConnectAccountRequest.md)| OK | [optional] |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -83,8 +76,7 @@ try {
 ```php
 deleteAccount($account_provider, $account_id)
 ```
-### URI(s):
-- https://aisp-api.blockmate.io Call
+
 Delete account
 
 ### Example
@@ -107,12 +99,8 @@ $apiInstance = new blockmate\Api\AccountProviderInfoApi(
 $account_provider = onchain/btc; // string | URL value from account_providers method
 $account_id = 163b6df1-dc0b-4086-8922-6068fe1e653d; // string | Account ID
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $apiInstance->deleteAccount($account_provider, $account_id, $hostIndex, $variables);
+    $apiInstance->deleteAccount($account_provider, $account_id);
 } catch (Exception $e) {
     echo 'Exception when calling AccountProviderInfoApi->deleteAccount: ', $e->getMessage(), PHP_EOL;
 }
@@ -124,8 +112,6 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **account_provider** | **string**| URL value from account_providers method | |
 | **account_id** | **string**| Account ID | |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -149,8 +135,7 @@ void (empty response body)
 ```php
 getAccountHint($account_provider): \blockmate\Model\GetAccountHint200Response
 ```
-### URI(s):
-- https://aisp-api.blockmate.io Call
+
 Get account hint
 
 ### Example
@@ -172,12 +157,8 @@ $apiInstance = new blockmate\Api\AccountProviderInfoApi(
 );
 $account_provider = onchain/btc; // string | URL value from account_providers method
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->getAccountHint($account_provider, $hostIndex, $variables);
+    $result = $apiInstance->getAccountHint($account_provider);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AccountProviderInfoApi->getAccountHint: ', $e->getMessage(), PHP_EOL;
@@ -189,8 +170,6 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **account_provider** | **string**| URL value from account_providers method | |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 

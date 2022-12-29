@@ -120,20 +120,14 @@ class AggregatedInfoApi
      *
      * Get list of account providers hints
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\AccountProviderHint|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function accountProviderHintsList(?int $hostIndex = null, array $variables = [])
+    public function accountProviderHintsList()
     {
-        list($response) = $this->accountProviderHintsListWithHttpInfo($hostIndex, $variables);
+        list($response) = $this->accountProviderHintsListWithHttpInfo();
         return $response;
     }
 
@@ -142,20 +136,14 @@ class AggregatedInfoApi
      *
      * Get list of account providers hints
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\AccountProviderHint|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function accountProviderHintsListWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function accountProviderHintsListWithHttpInfo()
     {
-        $request = $this->accountProviderHintsListRequest($hostIndex, $variables);
+        $request = $this->accountProviderHintsListRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -304,19 +292,13 @@ class AggregatedInfoApi
      *
      * Get list of account providers hints
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function accountProviderHintsListAsync(?int $hostIndex = null, array $variables = [])
+    public function accountProviderHintsListAsync()
     {
-        return $this->accountProviderHintsListAsyncWithHttpInfo($hostIndex, $variables)
+        return $this->accountProviderHintsListAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -329,20 +311,14 @@ class AggregatedInfoApi
      *
      * Get list of account providers hints
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function accountProviderHintsListAsyncWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function accountProviderHintsListAsyncWithHttpInfo()
     {
         $returnType = '\blockmate\Model\AccountProviderHint';
-        $request = $this->accountProviderHintsListRequest($hostIndex, $variables);
+        $request = $this->accountProviderHintsListRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -383,17 +359,11 @@ class AggregatedInfoApi
     /**
      * Create request for operation 'accountProviderHintsList'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function accountProviderHintsListRequest(?int $hostIndex = null, array $variables = [])
+    public function accountProviderHintsListRequest()
     {
 
         $resourcePath = '/v1/aggregate/account_provider_hints';
@@ -459,17 +429,7 @@ class AggregatedInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForaccountProviderHintsList();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -480,39 +440,18 @@ class AggregatedInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation accountProviderHintsList
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForaccountProviderHintsList(): array
-    {
-        return [
-            [
-                "url" => "https://aisp-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation accountProvidersList
      *
      * Get list of account providers
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\AccountProvider|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function accountProvidersList(?int $hostIndex = null, array $variables = [])
+    public function accountProvidersList()
     {
-        list($response) = $this->accountProvidersListWithHttpInfo($hostIndex, $variables);
+        list($response) = $this->accountProvidersListWithHttpInfo();
         return $response;
     }
 
@@ -521,20 +460,14 @@ class AggregatedInfoApi
      *
      * Get list of account providers
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\AccountProvider|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function accountProvidersListWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function accountProvidersListWithHttpInfo()
     {
-        $request = $this->accountProvidersListRequest($hostIndex, $variables);
+        $request = $this->accountProvidersListRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -683,19 +616,13 @@ class AggregatedInfoApi
      *
      * Get list of account providers
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function accountProvidersListAsync(?int $hostIndex = null, array $variables = [])
+    public function accountProvidersListAsync()
     {
-        return $this->accountProvidersListAsyncWithHttpInfo($hostIndex, $variables)
+        return $this->accountProvidersListAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -708,20 +635,14 @@ class AggregatedInfoApi
      *
      * Get list of account providers
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function accountProvidersListAsyncWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function accountProvidersListAsyncWithHttpInfo()
     {
         $returnType = '\blockmate\Model\AccountProvider';
-        $request = $this->accountProvidersListRequest($hostIndex, $variables);
+        $request = $this->accountProvidersListRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -762,17 +683,11 @@ class AggregatedInfoApi
     /**
      * Create request for operation 'accountProvidersList'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function accountProvidersListRequest(?int $hostIndex = null, array $variables = [])
+    public function accountProvidersListRequest()
     {
 
         $resourcePath = '/v1/aggregate/account_providers';
@@ -838,17 +753,7 @@ class AggregatedInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForaccountProvidersList();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -859,39 +764,18 @@ class AggregatedInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation accountProvidersList
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForaccountProvidersList(): array
-    {
-        return [
-            [
-                "url" => "https://aisp-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation accounts
      *
      * List accounts
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\Account[]|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function accounts(?int $hostIndex = null, array $variables = [])
+    public function accounts()
     {
-        list($response) = $this->accountsWithHttpInfo($hostIndex, $variables);
+        list($response) = $this->accountsWithHttpInfo();
         return $response;
     }
 
@@ -900,20 +784,14 @@ class AggregatedInfoApi
      *
      * List accounts
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\Account[]|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function accountsWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function accountsWithHttpInfo()
     {
-        $request = $this->accountsRequest($hostIndex, $variables);
+        $request = $this->accountsRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -1062,19 +940,13 @@ class AggregatedInfoApi
      *
      * List accounts
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function accountsAsync(?int $hostIndex = null, array $variables = [])
+    public function accountsAsync()
     {
-        return $this->accountsAsyncWithHttpInfo($hostIndex, $variables)
+        return $this->accountsAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1087,20 +959,14 @@ class AggregatedInfoApi
      *
      * List accounts
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function accountsAsyncWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function accountsAsyncWithHttpInfo()
     {
         $returnType = '\blockmate\Model\Account[]';
-        $request = $this->accountsRequest($hostIndex, $variables);
+        $request = $this->accountsRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1141,17 +1007,11 @@ class AggregatedInfoApi
     /**
      * Create request for operation 'accounts'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function accountsRequest(?int $hostIndex = null, array $variables = [])
+    public function accountsRequest()
     {
 
         $resourcePath = '/v1/aggregate/accounts';
@@ -1217,17 +1077,7 @@ class AggregatedInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForaccounts();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -1238,40 +1088,19 @@ class AggregatedInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation accounts
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForaccounts(): array
-    {
-        return [
-            [
-                "url" => "https://aisp-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation balance
      *
      * Get balance
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
      * @param  string $currency Currency to convert to. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\Balance200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function balance($currency = null, ?int $hostIndex = null, array $variables = [])
+    public function balance($currency = null)
     {
-        list($response) = $this->balanceWithHttpInfo($currency, $hostIndex, $variables);
+        list($response) = $this->balanceWithHttpInfo($currency);
         return $response;
     }
 
@@ -1280,21 +1109,15 @@ class AggregatedInfoApi
      *
      * Get balance
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
      * @param  string $currency Currency to convert to. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\Balance200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function balanceWithHttpInfo($currency = null, ?int $hostIndex = null, array $variables = [])
+    public function balanceWithHttpInfo($currency = null)
     {
-        $request = $this->balanceRequest($currency, $hostIndex, $variables);
+        $request = $this->balanceRequest($currency);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1443,20 +1266,14 @@ class AggregatedInfoApi
      *
      * Get balance
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
      * @param  string $currency Currency to convert to. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function balanceAsync($currency = null, ?int $hostIndex = null, array $variables = [])
+    public function balanceAsync($currency = null)
     {
-        return $this->balanceAsyncWithHttpInfo($currency, $hostIndex, $variables)
+        return $this->balanceAsyncWithHttpInfo($currency)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1469,21 +1286,15 @@ class AggregatedInfoApi
      *
      * Get balance
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
      * @param  string $currency Currency to convert to. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function balanceAsyncWithHttpInfo($currency = null, ?int $hostIndex = null, array $variables = [])
+    public function balanceAsyncWithHttpInfo($currency = null)
     {
         $returnType = '\blockmate\Model\Balance200Response';
-        $request = $this->balanceRequest($currency, $hostIndex, $variables);
+        $request = $this->balanceRequest($currency);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1524,18 +1335,12 @@ class AggregatedInfoApi
     /**
      * Create request for operation 'balance'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
      * @param  string $currency Currency to convert to. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function balanceRequest($currency = null, ?int $hostIndex = null, array $variables = [])
+    public function balanceRequest($currency = null)
     {
 
 
@@ -1611,17 +1416,7 @@ class AggregatedInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForbalance();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -1632,39 +1427,18 @@ class AggregatedInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation balance
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForbalance(): array
-    {
-        return [
-            [
-                "url" => "https://aisp-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation nFTMetadata
      *
      * Get NFT metadata
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array<string,\blockmate\Model\NFTMetadata200ResponseValue>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function nFTMetadata(?int $hostIndex = null, array $variables = [])
+    public function nFTMetadata()
     {
-        list($response) = $this->nFTMetadataWithHttpInfo($hostIndex, $variables);
+        list($response) = $this->nFTMetadataWithHttpInfo();
         return $response;
     }
 
@@ -1673,20 +1447,14 @@ class AggregatedInfoApi
      *
      * Get NFT metadata
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of array<string,\blockmate\Model\NFTMetadata200ResponseValue>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function nFTMetadataWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function nFTMetadataWithHttpInfo()
     {
-        $request = $this->nFTMetadataRequest($hostIndex, $variables);
+        $request = $this->nFTMetadataRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -1835,19 +1603,13 @@ class AggregatedInfoApi
      *
      * Get NFT metadata
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function nFTMetadataAsync(?int $hostIndex = null, array $variables = [])
+    public function nFTMetadataAsync()
     {
-        return $this->nFTMetadataAsyncWithHttpInfo($hostIndex, $variables)
+        return $this->nFTMetadataAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1860,20 +1622,14 @@ class AggregatedInfoApi
      *
      * Get NFT metadata
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function nFTMetadataAsyncWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function nFTMetadataAsyncWithHttpInfo()
     {
         $returnType = 'array<string,\blockmate\Model\NFTMetadata200ResponseValue>';
-        $request = $this->nFTMetadataRequest($hostIndex, $variables);
+        $request = $this->nFTMetadataRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1914,17 +1670,11 @@ class AggregatedInfoApi
     /**
      * Create request for operation 'nFTMetadata'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function nFTMetadataRequest(?int $hostIndex = null, array $variables = [])
+    public function nFTMetadataRequest()
     {
 
         $resourcePath = '/v1/aggregate/nft_metadata';
@@ -1990,17 +1740,7 @@ class AggregatedInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsFornFTMetadata();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -2011,28 +1751,9 @@ class AggregatedInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation nFTMetadata
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsFornFTMetadata(): array
-    {
-        return [
-            [
-                "url" => "https://aisp-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation transactions
      *
      * Get transactions
-     *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
      *
      * @param  \DateTime $since Set time from which the transactions will be get. (optional)
      * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
@@ -2040,16 +1761,14 @@ class AggregatedInfoApi
      * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\Transactions200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function transactions($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactions($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null)
     {
-        list($response) = $this->transactionsWithHttpInfo($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables);
+        list($response) = $this->transactionsWithHttpInfo($since, $until, $limit, $cursor, $currency, $account_filter);
         return $response;
     }
 
@@ -2058,26 +1777,20 @@ class AggregatedInfoApi
      *
      * Get transactions
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
      * @param  \DateTime $since Set time from which the transactions will be get. (optional)
      * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
      * @param  float $limit Limit the number of the transactions in the response. Default page size is 50. (optional)
      * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\Transactions200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function transactionsWithHttpInfo($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactionsWithHttpInfo($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null)
     {
-        $request = $this->transactionsRequest($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables);
+        $request = $this->transactionsRequest($since, $until, $limit, $cursor, $currency, $account_filter);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2226,25 +1939,19 @@ class AggregatedInfoApi
      *
      * Get transactions
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
      * @param  \DateTime $since Set time from which the transactions will be get. (optional)
      * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
      * @param  float $limit Limit the number of the transactions in the response. Default page size is 50. (optional)
      * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function transactionsAsync($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactionsAsync($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null)
     {
-        return $this->transactionsAsyncWithHttpInfo($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables)
+        return $this->transactionsAsyncWithHttpInfo($since, $until, $limit, $cursor, $currency, $account_filter)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2257,26 +1964,20 @@ class AggregatedInfoApi
      *
      * Get transactions
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
      * @param  \DateTime $since Set time from which the transactions will be get. (optional)
      * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
      * @param  float $limit Limit the number of the transactions in the response. Default page size is 50. (optional)
      * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function transactionsAsyncWithHttpInfo($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactionsAsyncWithHttpInfo($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null)
     {
         $returnType = '\blockmate\Model\Transactions200Response';
-        $request = $this->transactionsRequest($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables);
+        $request = $this->transactionsRequest($since, $until, $limit, $cursor, $currency, $account_filter);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2317,23 +2018,17 @@ class AggregatedInfoApi
     /**
      * Create request for operation 'transactions'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://aisp-api.blockmate.io
-     *
      * @param  \DateTime $since Set time from which the transactions will be get. (optional)
      * @param  \DateTime $until Set time to which the transactions will be get. The default value is the actual date. (optional)
      * @param  float $limit Limit the number of the transactions in the response. Default page size is 50. (optional)
      * @param  string $cursor Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. (optional)
      * @param  string $currency Currency to convert to. (optional)
      * @param  string $account_filter Filter results to only provided account. When omitted, it returns all transactions from all accounts. (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function transactionsRequest($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null, ?int $hostIndex = null, array $variables = [])
+    public function transactionsRequest($since = null, $until = null, $limit = null, $cursor = null, $currency = null, $account_filter = null)
     {
 
         if ($since !== null && !preg_match("/^[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/", $since)) {
@@ -2467,17 +2162,7 @@ class AggregatedInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsFortransactions();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -2485,21 +2170,6 @@ class AggregatedInfoApi
             $headers,
             $httpBody
         );
-    }
-
-    /**
-     * Returns an array of host settings for Operation transactions
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsFortransactions(): array
-    {
-        return [
-            [
-                "url" => "https://aisp-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
     }
 
     /**

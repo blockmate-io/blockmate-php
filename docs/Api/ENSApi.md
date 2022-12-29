@@ -1,20 +1,20 @@
-# blockmate\ExchangeRateInfoApi
+# blockmate\ENSApi
 
 All URIs are relative to https://api.blockmate.io, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**getCurrentExchangeRate()**](ExchangeRateInfoApi.md#getCurrentExchangeRate) | **GET** /v1/exchangerate/current | Get current exchange rate |
-| [**getHistoricalExchangeRate()**](ExchangeRateInfoApi.md#getHistoricalExchangeRate) | **GET** /v1/exchangerate/history | Get historical exchange rate |
+| [**getAddressFromDomain()**](ENSApi.md#getAddressFromDomain) | **GET** /v1/ens/addressFromDomain | Get address for specified ENS domain |
+| [**getDomainFromAddress()**](ENSApi.md#getDomainFromAddress) | **GET** /v1/ens/domainFromAddress | Get domain and metadata for specified ENS address |
 
 
-## `getCurrentExchangeRate()`
+## `getAddressFromDomain()`
 
 ```php
-getCurrentExchangeRate($pairs): \blockmate\Model\ExchangeRate[]
+getAddressFromDomain($domain): \blockmate\Model\GetAddressFromDomain200Response
 ```
 
-Get current exchange rate
+Get address for specified ENS domain
 
 ### Example
 
@@ -27,19 +27,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new blockmate\Api\ExchangeRateInfoApi(
+$apiInstance = new blockmate\Api\ENSApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$pairs = ETH/USD,BTC/EUR; // string | Currency pairs for which exchange rate should be returned
+$domain = alice.eth; // string | ENS domain for which Ethereum address should be returned
 
 try {
-    $result = $apiInstance->getCurrentExchangeRate($pairs);
+    $result = $apiInstance->getAddressFromDomain($domain);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ExchangeRateInfoApi->getCurrentExchangeRate: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ENSApi->getAddressFromDomain: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -47,11 +47,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **pairs** | **string**| Currency pairs for which exchange rate should be returned | |
+| **domain** | **string**| ENS domain for which Ethereum address should be returned | |
 
 ### Return type
 
-[**\blockmate\Model\ExchangeRate[]**](../Model/ExchangeRate.md)
+[**\blockmate\Model\GetAddressFromDomain200Response**](../Model/GetAddressFromDomain200Response.md)
 
 ### Authorization
 
@@ -66,13 +66,13 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `getHistoricalExchangeRate()`
+## `getDomainFromAddress()`
 
 ```php
-getHistoricalExchangeRate($pair, $days): \blockmate\Model\ExchangeRate[]
+getDomainFromAddress($address): \blockmate\Model\GetDomainFromAddress200Response
 ```
 
-Get historical exchange rate
+Get domain and metadata for specified ENS address
 
 ### Example
 
@@ -85,20 +85,19 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new blockmate\Api\ExchangeRateInfoApi(
+$apiInstance = new blockmate\Api\ENSApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$pair = ETH/USD; // string | Currency pair for which exchange rates should be returned
-$days = 2022-06-30,2022-06-29; // string | Historical dates for which exchange rates should be returned
+$address = 0xcd2e72aebe2a203b84f46deec948e6465db51c75; // string | Ethereum address for which domain and metadata should be returned
 
 try {
-    $result = $apiInstance->getHistoricalExchangeRate($pair, $days);
+    $result = $apiInstance->getDomainFromAddress($address);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ExchangeRateInfoApi->getHistoricalExchangeRate: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ENSApi->getDomainFromAddress: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -106,12 +105,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **pair** | **string**| Currency pair for which exchange rates should be returned | |
-| **days** | **string**| Historical dates for which exchange rates should be returned | |
+| **address** | **string**| Ethereum address for which domain and metadata should be returned | |
 
 ### Return type
 
-[**\blockmate\Model\ExchangeRate[]**](../Model/ExchangeRate.md)
+[**\blockmate\Model\GetDomainFromAddress200Response**](../Model/GetDomainFromAddress200Response.md)
 
 ### Authorization
 

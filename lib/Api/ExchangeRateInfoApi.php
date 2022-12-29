@@ -120,21 +120,15 @@ class ExchangeRateInfoApi
      *
      * Get current exchange rate
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pairs Currency pairs for which exchange rate should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\ExchangeRate[]|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getCurrentExchangeRate($pairs, ?int $hostIndex = null, array $variables = [])
+    public function getCurrentExchangeRate($pairs)
     {
-        list($response) = $this->getCurrentExchangeRateWithHttpInfo($pairs, $hostIndex, $variables);
+        list($response) = $this->getCurrentExchangeRateWithHttpInfo($pairs);
         return $response;
     }
 
@@ -143,21 +137,15 @@ class ExchangeRateInfoApi
      *
      * Get current exchange rate
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pairs Currency pairs for which exchange rate should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\ExchangeRate[]|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getCurrentExchangeRateWithHttpInfo($pairs, ?int $hostIndex = null, array $variables = [])
+    public function getCurrentExchangeRateWithHttpInfo($pairs)
     {
-        $request = $this->getCurrentExchangeRateRequest($pairs, $hostIndex, $variables);
+        $request = $this->getCurrentExchangeRateRequest($pairs);
 
         try {
             $options = $this->createHttpClientOption();
@@ -306,20 +294,14 @@ class ExchangeRateInfoApi
      *
      * Get current exchange rate
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pairs Currency pairs for which exchange rate should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCurrentExchangeRateAsync($pairs, ?int $hostIndex = null, array $variables = [])
+    public function getCurrentExchangeRateAsync($pairs)
     {
-        return $this->getCurrentExchangeRateAsyncWithHttpInfo($pairs, $hostIndex, $variables)
+        return $this->getCurrentExchangeRateAsyncWithHttpInfo($pairs)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -332,21 +314,15 @@ class ExchangeRateInfoApi
      *
      * Get current exchange rate
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pairs Currency pairs for which exchange rate should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCurrentExchangeRateAsyncWithHttpInfo($pairs, ?int $hostIndex = null, array $variables = [])
+    public function getCurrentExchangeRateAsyncWithHttpInfo($pairs)
     {
         $returnType = '\blockmate\Model\ExchangeRate[]';
-        $request = $this->getCurrentExchangeRateRequest($pairs, $hostIndex, $variables);
+        $request = $this->getCurrentExchangeRateRequest($pairs);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -387,18 +363,12 @@ class ExchangeRateInfoApi
     /**
      * Create request for operation 'getCurrentExchangeRate'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pairs Currency pairs for which exchange rate should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getCurrentExchangeRateRequest($pairs, ?int $hostIndex = null, array $variables = [])
+    public function getCurrentExchangeRateRequest($pairs)
     {
 
         // verify the required parameter 'pairs' is set
@@ -480,17 +450,7 @@ class ExchangeRateInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetCurrentExchangeRate();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -501,41 +461,20 @@ class ExchangeRateInfoApi
     }
 
     /**
-     * Returns an array of host settings for Operation getCurrentExchangeRate
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetCurrentExchangeRate(): array
-    {
-        return [
-            [
-                "url" => "https://data-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
-    }
-
-    /**
      * Operation getHistoricalExchangeRate
      *
      * Get historical exchange rate
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pair Currency pair for which exchange rates should be returned (required)
      * @param  string $days Historical dates for which exchange rates should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\ExchangeRate[]|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getHistoricalExchangeRate($pair, $days, ?int $hostIndex = null, array $variables = [])
+    public function getHistoricalExchangeRate($pair, $days)
     {
-        list($response) = $this->getHistoricalExchangeRateWithHttpInfo($pair, $days, $hostIndex, $variables);
+        list($response) = $this->getHistoricalExchangeRateWithHttpInfo($pair, $days);
         return $response;
     }
 
@@ -544,22 +483,16 @@ class ExchangeRateInfoApi
      *
      * Get historical exchange rate
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pair Currency pair for which exchange rates should be returned (required)
      * @param  string $days Historical dates for which exchange rates should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\ExchangeRate[]|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getHistoricalExchangeRateWithHttpInfo($pair, $days, ?int $hostIndex = null, array $variables = [])
+    public function getHistoricalExchangeRateWithHttpInfo($pair, $days)
     {
-        $request = $this->getHistoricalExchangeRateRequest($pair, $days, $hostIndex, $variables);
+        $request = $this->getHistoricalExchangeRateRequest($pair, $days);
 
         try {
             $options = $this->createHttpClientOption();
@@ -708,21 +641,15 @@ class ExchangeRateInfoApi
      *
      * Get historical exchange rate
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pair Currency pair for which exchange rates should be returned (required)
      * @param  string $days Historical dates for which exchange rates should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getHistoricalExchangeRateAsync($pair, $days, ?int $hostIndex = null, array $variables = [])
+    public function getHistoricalExchangeRateAsync($pair, $days)
     {
-        return $this->getHistoricalExchangeRateAsyncWithHttpInfo($pair, $days, $hostIndex, $variables)
+        return $this->getHistoricalExchangeRateAsyncWithHttpInfo($pair, $days)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -735,22 +662,16 @@ class ExchangeRateInfoApi
      *
      * Get historical exchange rate
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pair Currency pair for which exchange rates should be returned (required)
      * @param  string $days Historical dates for which exchange rates should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getHistoricalExchangeRateAsyncWithHttpInfo($pair, $days, ?int $hostIndex = null, array $variables = [])
+    public function getHistoricalExchangeRateAsyncWithHttpInfo($pair, $days)
     {
         $returnType = '\blockmate\Model\ExchangeRate[]';
-        $request = $this->getHistoricalExchangeRateRequest($pair, $days, $hostIndex, $variables);
+        $request = $this->getHistoricalExchangeRateRequest($pair, $days);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -791,19 +712,13 @@ class ExchangeRateInfoApi
     /**
      * Create request for operation 'getHistoricalExchangeRate'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
      * @param  string $pair Currency pair for which exchange rates should be returned (required)
      * @param  string $days Historical dates for which exchange rates should be returned (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getHistoricalExchangeRateRequest($pair, $days, ?int $hostIndex = null, array $variables = [])
+    public function getHistoricalExchangeRateRequest($pair, $days)
     {
 
         // verify the required parameter 'pair' is set
@@ -901,17 +816,7 @@ class ExchangeRateInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetHistoricalExchangeRate();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -919,21 +824,6 @@ class ExchangeRateInfoApi
             $headers,
             $httpBody
         );
-    }
-
-    /**
-     * Returns an array of host settings for Operation getHistoricalExchangeRate
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetHistoricalExchangeRate(): array
-    {
-        return [
-            [
-                "url" => "https://data-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
     }
 
     /**

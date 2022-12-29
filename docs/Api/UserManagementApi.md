@@ -1,6 +1,6 @@
 # blockmate\UserManagementApi
 
-All URIs are relative to http://localhost, except if the operation defines another base path.
+All URIs are relative to https://api.blockmate.io, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
@@ -17,8 +17,7 @@ All URIs are relative to http://localhost, except if the operation defines anoth
 ```php
 authUser($id): \blockmate\Model\AuthUser200Response
 ```
-### URI(s):
-- https://auth.blockmate.io Authentication
+
 Authenticate user
 
 ### Example
@@ -42,12 +41,8 @@ $apiInstance = new blockmate\Api\UserManagementApi(
 );
 $id = 4301140e-d639-11ec-9120-00155d03ab64; // string | User id
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->authUser($id, $hostIndex, $variables);
+    $result = $apiInstance->authUser($id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserManagementApi->authUser: ', $e->getMessage(), PHP_EOL;
@@ -59,8 +54,6 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **string**| User id | |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -84,8 +77,7 @@ try {
 ```php
 createUser($create_user_request): \blockmate\Model\User
 ```
-### URI(s):
-- https://auth.blockmate.io Authentication
+
 Create user
 
 ### Example
@@ -109,12 +101,8 @@ $apiInstance = new blockmate\Api\UserManagementApi(
 );
 $create_user_request = new \blockmate\Model\CreateUserRequest(); // \blockmate\Model\CreateUserRequest | User
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->createUser($create_user_request, $hostIndex, $variables);
+    $result = $apiInstance->createUser($create_user_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserManagementApi->createUser: ', $e->getMessage(), PHP_EOL;
@@ -126,8 +114,6 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **create_user_request** | [**\blockmate\Model\CreateUserRequest**](../Model/CreateUserRequest.md)| User | [optional] |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -151,8 +137,7 @@ try {
 ```php
 deleteUser($id): \blockmate\Model\DeleteUser200Response
 ```
-### URI(s):
-- https://auth.blockmate.io Authentication
+
 Delete user
 
 ### Example
@@ -176,12 +161,8 @@ $apiInstance = new blockmate\Api\UserManagementApi(
 );
 $id = 4301140e-d639-11ec-9120-00155d03ab64; // string | User id
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->deleteUser($id, $hostIndex, $variables);
+    $result = $apiInstance->deleteUser($id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserManagementApi->deleteUser: ', $e->getMessage(), PHP_EOL;
@@ -193,8 +174,6 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **string**| User id | |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -218,8 +197,7 @@ try {
 ```php
 getUser($id): \blockmate\Model\User
 ```
-### URI(s):
-- https://auth.blockmate.io Authentication
+
 Get user
 
 ### Example
@@ -243,12 +221,8 @@ $apiInstance = new blockmate\Api\UserManagementApi(
 );
 $id = 4301140e-d639-11ec-9120-00155d03ab64; // string | User id
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->getUser($id, $hostIndex, $variables);
+    $result = $apiInstance->getUser($id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserManagementApi->getUser: ', $e->getMessage(), PHP_EOL;
@@ -260,8 +234,6 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **string**| User id | |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -285,8 +257,7 @@ try {
 ```php
 listUsers(): \blockmate\Model\User[]
 ```
-### URI(s):
-- https://auth.blockmate.io Authentication
+
 List users
 
 ### Example
@@ -309,12 +280,8 @@ $apiInstance = new blockmate\Api\UserManagementApi(
     $config
 );
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->listUsers($hostIndex, $variables);
+    $result = $apiInstance->listUsers();
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserManagementApi->listUsers: ', $e->getMessage(), PHP_EOL;
@@ -324,8 +291,6 @@ try {
 ### Parameters
 
 This endpoint does not need any parameter.
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -349,8 +314,7 @@ This endpoint does not need any parameter.
 ```php
 updateUser($id, $create_user_request): \blockmate\Model\User
 ```
-### URI(s):
-- https://auth.blockmate.io Authentication
+
 Update user
 
 ### Example
@@ -375,12 +339,8 @@ $apiInstance = new blockmate\Api\UserManagementApi(
 $id = 4301140e-d639-11ec-9120-00155d03ab64; // string | User id
 $create_user_request = new \blockmate\Model\CreateUserRequest(); // \blockmate\Model\CreateUserRequest | User
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->updateUser($id, $create_user_request, $hostIndex, $variables);
+    $result = $apiInstance->updateUser($id, $create_user_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UserManagementApi->updateUser: ', $e->getMessage(), PHP_EOL;
@@ -393,8 +353,6 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **string**| User id | |
 | **create_user_request** | [**\blockmate\Model\CreateUserRequest**](../Model/CreateUserRequest.md)| User | [optional] |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 

@@ -116,50 +116,38 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Operation getAddressNameInfo
+     * Operation getAddressNameInfoMulti
      *
-     * Get address name and category info
+     * Get address name and category info for multiple addresses
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
-     * @param  string $address Address for wich name and category should be returned (required)
      * @param  string $chain Blockchain identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
+     * @param  string[] $request_body OK (optional)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \blockmate\Model\GetAddressNameInfo200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
+     * @return array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getAddressNameInfo($address, $chain, ?int $hostIndex = null, array $variables = [])
+    public function getAddressNameInfoMulti($chain, $request_body = null)
     {
-        list($response) = $this->getAddressNameInfoWithHttpInfo($address, $chain, $hostIndex, $variables);
+        list($response) = $this->getAddressNameInfoMultiWithHttpInfo($chain, $request_body);
         return $response;
     }
 
     /**
-     * Operation getAddressNameInfoWithHttpInfo
+     * Operation getAddressNameInfoMultiWithHttpInfo
      *
-     * Get address name and category info
+     * Get address name and category info for multiple addresses
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
-     * @param  string $address Address for wich name and category should be returned (required)
      * @param  string $chain Blockchain identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
+     * @param  string[] $request_body OK (optional)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \blockmate\Model\GetAddressNameInfo200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAddressNameInfoWithHttpInfo($address, $chain, ?int $hostIndex = null, array $variables = [])
+    public function getAddressNameInfoMultiWithHttpInfo($chain, $request_body = null)
     {
-        $request = $this->getAddressNameInfoRequest($address, $chain, $hostIndex, $variables);
+        $request = $this->getAddressNameInfoMultiRequest($chain, $request_body);
 
         try {
             $options = $this->createHttpClientOption();
@@ -199,17 +187,17 @@ class AddressNameAndCategoryInfoApi
             switch($statusCode) {
             
                 case 200:
-                    if ('\blockmate\Model\GetAddressNameInfo200Response' === '\SplFileObject') {
+                    if ('array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\GetAddressNameInfo200Response' !== 'string') {
+                        if ('array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAddressNameInfo200Response', []),
+                        ObjectSerializer::deserialize($content, 'array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -250,7 +238,7 @@ class AddressNameAndCategoryInfoApi
             
             }
 
-            $returnType = '\blockmate\Model\GetAddressNameInfo200Response';
+            $returnType = 'array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -272,7 +260,7 @@ class AddressNameAndCategoryInfoApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\GetAddressNameInfo200Response',
+                        'array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -304,25 +292,19 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Operation getAddressNameInfoAsync
+     * Operation getAddressNameInfoMultiAsync
      *
-     * Get address name and category info
+     * Get address name and category info for multiple addresses
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
-     * @param  string $address Address for wich name and category should be returned (required)
      * @param  string $chain Blockchain identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
+     * @param  string[] $request_body OK (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressNameInfoAsync($address, $chain, ?int $hostIndex = null, array $variables = [])
+    public function getAddressNameInfoMultiAsync($chain, $request_body = null)
     {
-        return $this->getAddressNameInfoAsyncWithHttpInfo($address, $chain, $hostIndex, $variables)
+        return $this->getAddressNameInfoMultiAsyncWithHttpInfo($chain, $request_body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -331,26 +313,20 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Operation getAddressNameInfoAsyncWithHttpInfo
+     * Operation getAddressNameInfoMultiAsyncWithHttpInfo
      *
-     * Get address name and category info
+     * Get address name and category info for multiple addresses
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
-     * @param  string $address Address for wich name and category should be returned (required)
      * @param  string $chain Blockchain identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
+     * @param  string[] $request_body OK (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressNameInfoAsyncWithHttpInfo($address, $chain, ?int $hostIndex = null, array $variables = [])
+    public function getAddressNameInfoMultiAsyncWithHttpInfo($chain, $request_body = null)
     {
-        $returnType = '\blockmate\Model\GetAddressNameInfo200Response';
-        $request = $this->getAddressNameInfoRequest($address, $chain, $hostIndex, $variables);
+        $returnType = 'array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>';
+        $request = $this->getAddressNameInfoMultiRequest($chain, $request_body);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -389,34 +365,385 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Create request for operation 'getAddressNameInfo'
+     * Create request for operation 'getAddressNameInfoMulti'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://data-api.blockmate.io
-     *
-     * @param  string $address Address for wich name and category should be returned (required)
      * @param  string $chain Blockchain identifier (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
+     * @param  string[] $request_body OK (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAddressNameInfoRequest($address, $chain, ?int $hostIndex = null, array $variables = [])
+    public function getAddressNameInfoMultiRequest($chain, $request_body = null)
+    {
+
+        // verify the required parameter 'chain' is set
+        if ($chain === null || (is_array($chain) && count($chain) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $chain when calling getAddressNameInfoMulti'
+            );
+        }
+
+
+        $resourcePath = '/v1/addressname/multi';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $chain,
+            'chain', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+
+
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($request_body)) {
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_body));
+            } else {
+                $httpBody = $request_body;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getAddressNameInfoSingle
+     *
+     * Get address name and category info for single address
+     *
+     * @param  string $address Address for which name and category should be returned (required)
+     * @param  string $chain Blockchain identifier (required)
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \blockmate\Model\GetAddressNameInfoSingle200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
+     */
+    public function getAddressNameInfoSingle($address, $chain)
+    {
+        list($response) = $this->getAddressNameInfoSingleWithHttpInfo($address, $chain);
+        return $response;
+    }
+
+    /**
+     * Operation getAddressNameInfoSingleWithHttpInfo
+     *
+     * Get address name and category info for single address
+     *
+     * @param  string $address Address for which name and category should be returned (required)
+     * @param  string $chain Blockchain identifier (required)
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \blockmate\Model\GetAddressNameInfoSingle200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAddressNameInfoSingleWithHttpInfo($address, $chain)
+    {
+        $request = $this->getAddressNameInfoSingleRequest($address, $chain);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+            
+                case 200:
+                    if ('\blockmate\Model\GetAddressNameInfoSingle200Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\GetAddressNameInfoSingle200Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAddressNameInfoSingle200Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+                case 400:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject400Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\UserAPIAuthenticateProject400Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject400Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+                case 401:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject401Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\UserAPIAuthenticateProject401Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject401Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            }
+
+            $returnType = '\blockmate\Model\GetAddressNameInfoSingle200Response';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\GetAddressNameInfoSingle200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\UserAPIAuthenticateProject400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\UserAPIAuthenticateProject401Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAddressNameInfoSingleAsync
+     *
+     * Get address name and category info for single address
+     *
+     * @param  string $address Address for which name and category should be returned (required)
+     * @param  string $chain Blockchain identifier (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAddressNameInfoSingleAsync($address, $chain)
+    {
+        return $this->getAddressNameInfoSingleAsyncWithHttpInfo($address, $chain)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAddressNameInfoSingleAsyncWithHttpInfo
+     *
+     * Get address name and category info for single address
+     *
+     * @param  string $address Address for which name and category should be returned (required)
+     * @param  string $chain Blockchain identifier (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAddressNameInfoSingleAsyncWithHttpInfo($address, $chain)
+    {
+        $returnType = '\blockmate\Model\GetAddressNameInfoSingle200Response';
+        $request = $this->getAddressNameInfoSingleRequest($address, $chain);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAddressNameInfoSingle'
+     *
+     * @param  string $address Address for which name and category should be returned (required)
+     * @param  string $chain Blockchain identifier (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAddressNameInfoSingleRequest($address, $chain)
     {
 
         // verify the required parameter 'address' is set
         if ($address === null || (is_array($address) && count($address) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $address when calling getAddressNameInfo'
+                'Missing the required parameter $address when calling getAddressNameInfoSingle'
             );
         }
 
         // verify the required parameter 'chain' is set
         if ($chain === null || (is_array($chain) && count($chain) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $chain when calling getAddressNameInfo'
+                'Missing the required parameter $chain when calling getAddressNameInfoSingle'
             );
         }
 
@@ -501,17 +828,7 @@ class AddressNameAndCategoryInfoApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetAddressNameInfo();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -519,21 +836,6 @@ class AddressNameAndCategoryInfoApi
             $headers,
             $httpBody
         );
-    }
-
-    /**
-     * Returns an array of host settings for Operation getAddressNameInfo
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetAddressNameInfo(): array
-    {
-        return [
-            [
-                "url" => "https://data-api.blockmate.io",
-                "description" => "Call",
-            ]
-        ];
     }
 
     /**

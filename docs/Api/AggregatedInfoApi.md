@@ -1,6 +1,6 @@
 # blockmate\AggregatedInfoApi
 
-All URIs are relative to http://localhost, except if the operation defines another base path.
+All URIs are relative to https://api.blockmate.io, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
@@ -17,8 +17,7 @@ All URIs are relative to http://localhost, except if the operation defines anoth
 ```php
 accountProviderHintsList(): \blockmate\Model\AccountProviderHint
 ```
-### URI(s):
-- https://aisp-api.blockmate.io Call
+
 Get list of account providers hints
 
 ### Example
@@ -39,12 +38,8 @@ $apiInstance = new blockmate\Api\AggregatedInfoApi(
     $config
 );
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->accountProviderHintsList($hostIndex, $variables);
+    $result = $apiInstance->accountProviderHintsList();
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AggregatedInfoApi->accountProviderHintsList: ', $e->getMessage(), PHP_EOL;
@@ -54,8 +49,6 @@ try {
 ### Parameters
 
 This endpoint does not need any parameter.
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -79,8 +72,7 @@ This endpoint does not need any parameter.
 ```php
 accountProvidersList(): \blockmate\Model\AccountProvider
 ```
-### URI(s):
-- https://aisp-api.blockmate.io Call
+
 Get list of account providers
 
 ### Example
@@ -101,12 +93,8 @@ $apiInstance = new blockmate\Api\AggregatedInfoApi(
     $config
 );
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->accountProvidersList($hostIndex, $variables);
+    $result = $apiInstance->accountProvidersList();
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AggregatedInfoApi->accountProvidersList: ', $e->getMessage(), PHP_EOL;
@@ -116,8 +104,6 @@ try {
 ### Parameters
 
 This endpoint does not need any parameter.
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -141,8 +127,7 @@ This endpoint does not need any parameter.
 ```php
 accounts(): \blockmate\Model\Account[]
 ```
-### URI(s):
-- https://aisp-api.blockmate.io Call
+
 List accounts
 
 ### Example
@@ -163,12 +148,8 @@ $apiInstance = new blockmate\Api\AggregatedInfoApi(
     $config
 );
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->accounts($hostIndex, $variables);
+    $result = $apiInstance->accounts();
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AggregatedInfoApi->accounts: ', $e->getMessage(), PHP_EOL;
@@ -178,8 +159,6 @@ try {
 ### Parameters
 
 This endpoint does not need any parameter.
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -203,8 +182,7 @@ This endpoint does not need any parameter.
 ```php
 balance($currency): \blockmate\Model\Balance200Response
 ```
-### URI(s):
-- https://aisp-api.blockmate.io Call
+
 Get balance
 
 ### Example
@@ -226,12 +204,8 @@ $apiInstance = new blockmate\Api\AggregatedInfoApi(
 );
 $currency = USD; // string | Currency to convert to.
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->balance($currency, $hostIndex, $variables);
+    $result = $apiInstance->balance($currency);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AggregatedInfoApi->balance: ', $e->getMessage(), PHP_EOL;
@@ -243,8 +217,6 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **currency** | **string**| Currency to convert to. | [optional] |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -268,8 +240,7 @@ try {
 ```php
 nFTMetadata(): array<string,\blockmate\Model\NFTMetadata200ResponseValue>
 ```
-### URI(s):
-- https://aisp-api.blockmate.io Call
+
 Get NFT metadata
 
 ### Example
@@ -290,12 +261,8 @@ $apiInstance = new blockmate\Api\AggregatedInfoApi(
     $config
 );
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->nFTMetadata($hostIndex, $variables);
+    $result = $apiInstance->nFTMetadata();
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AggregatedInfoApi->nFTMetadata: ', $e->getMessage(), PHP_EOL;
@@ -305,8 +272,6 @@ try {
 ### Parameters
 
 This endpoint does not need any parameter.
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 
@@ -330,8 +295,7 @@ This endpoint does not need any parameter.
 ```php
 transactions($since, $until, $limit, $cursor, $currency, $account_filter): \blockmate\Model\Transactions200Response
 ```
-### URI(s):
-- https://aisp-api.blockmate.io Call
+
 Get transactions
 
 ### Example
@@ -358,12 +322,8 @@ $cursor = 'cursor_example'; // string | Specify on requesting the next page. Use
 $currency = USD; // string | Currency to convert to.
 $account_filter = 497f6eca-6276-4993-bfeb-53cbbbba6f08; // string | Filter results to only provided account. When omitted, it returns all transactions from all accounts.
 
-$hostIndex = 0;
-$variables = [
-];
-
 try {
-    $result = $apiInstance->transactions($since, $until, $limit, $cursor, $currency, $account_filter, $hostIndex, $variables);
+    $result = $apiInstance->transactions($since, $until, $limit, $cursor, $currency, $account_filter);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AggregatedInfoApi->transactions: ', $e->getMessage(), PHP_EOL;
@@ -380,8 +340,6 @@ try {
 | **cursor** | **string**| Specify on requesting the next page. Use the &#x60;page_cursor&#x60; from the previous response. | [optional] |
 | **currency** | **string**| Currency to convert to. | [optional] |
 | **account_filter** | **string**| Filter results to only provided account. When omitted, it returns all transactions from all accounts. | [optional] |
-| hostIndex | null|int | Host index. Defaults to null. If null, then the library will use $this->hostIndex instead | [optional] |
-| variables | array | Associative array of variables to pass to the host. Defaults to empty array. | [optional] |
 
 ### Return type
 

@@ -120,20 +120,14 @@ class AuthenticationApi
      *
      * Authenticate developer
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\UserAPIAuthenticateProject200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function userAPIAuthenticateDeveloper(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateDeveloper()
     {
-        list($response) = $this->userAPIAuthenticateDeveloperWithHttpInfo($hostIndex, $variables);
+        list($response) = $this->userAPIAuthenticateDeveloperWithHttpInfo();
         return $response;
     }
 
@@ -142,20 +136,14 @@ class AuthenticationApi
      *
      * Authenticate developer
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\UserAPIAuthenticateProject200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function userAPIAuthenticateDeveloperWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateDeveloperWithHttpInfo()
     {
-        $request = $this->userAPIAuthenticateDeveloperRequest($hostIndex, $variables);
+        $request = $this->userAPIAuthenticateDeveloperRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -304,19 +292,13 @@ class AuthenticationApi
      *
      * Authenticate developer
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function userAPIAuthenticateDeveloperAsync(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateDeveloperAsync()
     {
-        return $this->userAPIAuthenticateDeveloperAsyncWithHttpInfo($hostIndex, $variables)
+        return $this->userAPIAuthenticateDeveloperAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -329,20 +311,14 @@ class AuthenticationApi
      *
      * Authenticate developer
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function userAPIAuthenticateDeveloperAsyncWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateDeveloperAsyncWithHttpInfo()
     {
         $returnType = '\blockmate\Model\UserAPIAuthenticateProject200Response';
-        $request = $this->userAPIAuthenticateDeveloperRequest($hostIndex, $variables);
+        $request = $this->userAPIAuthenticateDeveloperRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -383,17 +359,11 @@ class AuthenticationApi
     /**
      * Create request for operation 'userAPIAuthenticateDeveloper'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function userAPIAuthenticateDeveloperRequest(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateDeveloperRequest()
     {
 
         $resourcePath = '/v1/auth/developer';
@@ -460,17 +430,7 @@ class AuthenticationApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForuserAPIAuthenticateDeveloper();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -481,39 +441,18 @@ class AuthenticationApi
     }
 
     /**
-     * Returns an array of host settings for Operation userAPIAuthenticateDeveloper
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForuserAPIAuthenticateDeveloper(): array
-    {
-        return [
-            [
-                "url" => "https://auth.blockmate.io",
-                "description" => "Authentication",
-            ]
-        ];
-    }
-
-    /**
      * Operation userAPIAuthenticateProject
      *
      * Authenticate project
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\UserAPIAuthenticateProject200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function userAPIAuthenticateProject(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateProject()
     {
-        list($response) = $this->userAPIAuthenticateProjectWithHttpInfo($hostIndex, $variables);
+        list($response) = $this->userAPIAuthenticateProjectWithHttpInfo();
         return $response;
     }
 
@@ -522,20 +461,14 @@ class AuthenticationApi
      *
      * Authenticate project
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\UserAPIAuthenticateProject200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function userAPIAuthenticateProjectWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateProjectWithHttpInfo()
     {
-        $request = $this->userAPIAuthenticateProjectRequest($hostIndex, $variables);
+        $request = $this->userAPIAuthenticateProjectRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -684,19 +617,13 @@ class AuthenticationApi
      *
      * Authenticate project
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function userAPIAuthenticateProjectAsync(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateProjectAsync()
     {
-        return $this->userAPIAuthenticateProjectAsyncWithHttpInfo($hostIndex, $variables)
+        return $this->userAPIAuthenticateProjectAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -709,20 +636,14 @@ class AuthenticationApi
      *
      * Authenticate project
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function userAPIAuthenticateProjectAsyncWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateProjectAsyncWithHttpInfo()
     {
         $returnType = '\blockmate\Model\UserAPIAuthenticateProject200Response';
-        $request = $this->userAPIAuthenticateProjectRequest($hostIndex, $variables);
+        $request = $this->userAPIAuthenticateProjectRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -763,17 +684,11 @@ class AuthenticationApi
     /**
      * Create request for operation 'userAPIAuthenticateProject'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function userAPIAuthenticateProjectRequest(?int $hostIndex = null, array $variables = [])
+    public function userAPIAuthenticateProjectRequest()
     {
 
         $resourcePath = '/v1/auth';
@@ -840,17 +755,7 @@ class AuthenticationApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForuserAPIAuthenticateProject();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -858,21 +763,6 @@ class AuthenticationApi
             $headers,
             $httpBody
         );
-    }
-
-    /**
-     * Returns an array of host settings for Operation userAPIAuthenticateProject
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForuserAPIAuthenticateProject(): array
-    {
-        return [
-            [
-                "url" => "https://auth.blockmate.io",
-                "description" => "Authentication",
-            ]
-        ];
     }
 
     /**

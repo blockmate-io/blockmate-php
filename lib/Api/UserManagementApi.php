@@ -120,21 +120,15 @@ class UserManagementApi
      *
      * Authenticate user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\AuthUser200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response|\blockmate\Model\DeleteUser404Response
      */
-    public function authUser($id, ?int $hostIndex = null, array $variables = [])
+    public function authUser($id)
     {
-        list($response) = $this->authUserWithHttpInfo($id, $hostIndex, $variables);
+        list($response) = $this->authUserWithHttpInfo($id);
         return $response;
     }
 
@@ -143,21 +137,15 @@ class UserManagementApi
      *
      * Authenticate user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\AuthUser200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response|\blockmate\Model\DeleteUser404Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function authUserWithHttpInfo($id, ?int $hostIndex = null, array $variables = [])
+    public function authUserWithHttpInfo($id)
     {
-        $request = $this->authUserRequest($id, $hostIndex, $variables);
+        $request = $this->authUserRequest($id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -333,20 +321,14 @@ class UserManagementApi
      *
      * Authenticate user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authUserAsync($id, ?int $hostIndex = null, array $variables = [])
+    public function authUserAsync($id)
     {
-        return $this->authUserAsyncWithHttpInfo($id, $hostIndex, $variables)
+        return $this->authUserAsyncWithHttpInfo($id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -359,21 +341,15 @@ class UserManagementApi
      *
      * Authenticate user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function authUserAsyncWithHttpInfo($id, ?int $hostIndex = null, array $variables = [])
+    public function authUserAsyncWithHttpInfo($id)
     {
         $returnType = '\blockmate\Model\AuthUser200Response';
-        $request = $this->authUserRequest($id, $hostIndex, $variables);
+        $request = $this->authUserRequest($id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -414,18 +390,12 @@ class UserManagementApi
     /**
      * Create request for operation 'authUser'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function authUserRequest($id, ?int $hostIndex = null, array $variables = [])
+    public function authUserRequest($id)
     {
 
         // verify the required parameter 'id' is set
@@ -507,17 +477,7 @@ class UserManagementApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForauthUser();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -528,40 +488,19 @@ class UserManagementApi
     }
 
     /**
-     * Returns an array of host settings for Operation authUser
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForauthUser(): array
-    {
-        return [
-            [
-                "url" => "https://auth.blockmate.io",
-                "description" => "Authentication",
-            ]
-        ];
-    }
-
-    /**
      * Operation createUser
      *
      * Create user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\User|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function createUser($create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function createUser($create_user_request = null)
     {
-        list($response) = $this->createUserWithHttpInfo($create_user_request, $hostIndex, $variables);
+        list($response) = $this->createUserWithHttpInfo($create_user_request);
         return $response;
     }
 
@@ -570,21 +509,15 @@ class UserManagementApi
      *
      * Create user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\User|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createUserWithHttpInfo($create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function createUserWithHttpInfo($create_user_request = null)
     {
-        $request = $this->createUserRequest($create_user_request, $hostIndex, $variables);
+        $request = $this->createUserRequest($create_user_request);
 
         try {
             $options = $this->createHttpClientOption();
@@ -733,20 +666,14 @@ class UserManagementApi
      *
      * Create user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createUserAsync($create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function createUserAsync($create_user_request = null)
     {
-        return $this->createUserAsyncWithHttpInfo($create_user_request, $hostIndex, $variables)
+        return $this->createUserAsyncWithHttpInfo($create_user_request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -759,21 +686,15 @@ class UserManagementApi
      *
      * Create user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createUserAsyncWithHttpInfo($create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function createUserAsyncWithHttpInfo($create_user_request = null)
     {
         $returnType = '\blockmate\Model\User';
-        $request = $this->createUserRequest($create_user_request, $hostIndex, $variables);
+        $request = $this->createUserRequest($create_user_request);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -814,18 +735,12 @@ class UserManagementApi
     /**
      * Create request for operation 'createUser'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createUserRequest($create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function createUserRequest($create_user_request = null)
     {
 
 
@@ -899,17 +814,7 @@ class UserManagementApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForcreateUser();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
@@ -920,40 +825,19 @@ class UserManagementApi
     }
 
     /**
-     * Returns an array of host settings for Operation createUser
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForcreateUser(): array
-    {
-        return [
-            [
-                "url" => "https://auth.blockmate.io",
-                "description" => "Authentication",
-            ]
-        ];
-    }
-
-    /**
      * Operation deleteUser
      *
      * Delete user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\DeleteUser200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response|\blockmate\Model\DeleteUser404Response
      */
-    public function deleteUser($id, ?int $hostIndex = null, array $variables = [])
+    public function deleteUser($id)
     {
-        list($response) = $this->deleteUserWithHttpInfo($id, $hostIndex, $variables);
+        list($response) = $this->deleteUserWithHttpInfo($id);
         return $response;
     }
 
@@ -962,21 +846,15 @@ class UserManagementApi
      *
      * Delete user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\DeleteUser200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response|\blockmate\Model\DeleteUser404Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteUserWithHttpInfo($id, ?int $hostIndex = null, array $variables = [])
+    public function deleteUserWithHttpInfo($id)
     {
-        $request = $this->deleteUserRequest($id, $hostIndex, $variables);
+        $request = $this->deleteUserRequest($id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1152,20 +1030,14 @@ class UserManagementApi
      *
      * Delete user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteUserAsync($id, ?int $hostIndex = null, array $variables = [])
+    public function deleteUserAsync($id)
     {
-        return $this->deleteUserAsyncWithHttpInfo($id, $hostIndex, $variables)
+        return $this->deleteUserAsyncWithHttpInfo($id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1178,21 +1050,15 @@ class UserManagementApi
      *
      * Delete user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteUserAsyncWithHttpInfo($id, ?int $hostIndex = null, array $variables = [])
+    public function deleteUserAsyncWithHttpInfo($id)
     {
         $returnType = '\blockmate\Model\DeleteUser200Response';
-        $request = $this->deleteUserRequest($id, $hostIndex, $variables);
+        $request = $this->deleteUserRequest($id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1233,18 +1099,12 @@ class UserManagementApi
     /**
      * Create request for operation 'deleteUser'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function deleteUserRequest($id, ?int $hostIndex = null, array $variables = [])
+    public function deleteUserRequest($id)
     {
 
         // verify the required parameter 'id' is set
@@ -1326,17 +1186,7 @@ class UserManagementApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsFordeleteUser();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'DELETE',
@@ -1347,40 +1197,19 @@ class UserManagementApi
     }
 
     /**
-     * Returns an array of host settings for Operation deleteUser
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsFordeleteUser(): array
-    {
-        return [
-            [
-                "url" => "https://auth.blockmate.io",
-                "description" => "Authentication",
-            ]
-        ];
-    }
-
-    /**
      * Operation getUser
      *
      * Get user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\User|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response|\blockmate\Model\GetUser404Response
      */
-    public function getUser($id, ?int $hostIndex = null, array $variables = [])
+    public function getUser($id)
     {
-        list($response) = $this->getUserWithHttpInfo($id, $hostIndex, $variables);
+        list($response) = $this->getUserWithHttpInfo($id);
         return $response;
     }
 
@@ -1389,21 +1218,15 @@ class UserManagementApi
      *
      * Get user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\User|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response|\blockmate\Model\GetUser404Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getUserWithHttpInfo($id, ?int $hostIndex = null, array $variables = [])
+    public function getUserWithHttpInfo($id)
     {
-        $request = $this->getUserRequest($id, $hostIndex, $variables);
+        $request = $this->getUserRequest($id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1579,20 +1402,14 @@ class UserManagementApi
      *
      * Get user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserAsync($id, ?int $hostIndex = null, array $variables = [])
+    public function getUserAsync($id)
     {
-        return $this->getUserAsyncWithHttpInfo($id, $hostIndex, $variables)
+        return $this->getUserAsyncWithHttpInfo($id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1605,21 +1422,15 @@ class UserManagementApi
      *
      * Get user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUserAsyncWithHttpInfo($id, ?int $hostIndex = null, array $variables = [])
+    public function getUserAsyncWithHttpInfo($id)
     {
         $returnType = '\blockmate\Model\User';
-        $request = $this->getUserRequest($id, $hostIndex, $variables);
+        $request = $this->getUserRequest($id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1660,18 +1471,12 @@ class UserManagementApi
     /**
      * Create request for operation 'getUser'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getUserRequest($id, ?int $hostIndex = null, array $variables = [])
+    public function getUserRequest($id)
     {
 
         // verify the required parameter 'id' is set
@@ -1753,17 +1558,7 @@ class UserManagementApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForgetUser();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -1774,39 +1569,18 @@ class UserManagementApi
     }
 
     /**
-     * Returns an array of host settings for Operation getUser
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForgetUser(): array
-    {
-        return [
-            [
-                "url" => "https://auth.blockmate.io",
-                "description" => "Authentication",
-            ]
-        ];
-    }
-
-    /**
      * Operation listUsers
      *
      * List users
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\User[]|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function listUsers(?int $hostIndex = null, array $variables = [])
+    public function listUsers()
     {
-        list($response) = $this->listUsersWithHttpInfo($hostIndex, $variables);
+        list($response) = $this->listUsersWithHttpInfo();
         return $response;
     }
 
@@ -1815,20 +1589,14 @@ class UserManagementApi
      *
      * List users
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\User[]|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listUsersWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function listUsersWithHttpInfo()
     {
-        $request = $this->listUsersRequest($hostIndex, $variables);
+        $request = $this->listUsersRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -1977,19 +1745,13 @@ class UserManagementApi
      *
      * List users
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUsersAsync(?int $hostIndex = null, array $variables = [])
+    public function listUsersAsync()
     {
-        return $this->listUsersAsyncWithHttpInfo($hostIndex, $variables)
+        return $this->listUsersAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2002,20 +1764,14 @@ class UserManagementApi
      *
      * List users
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listUsersAsyncWithHttpInfo(?int $hostIndex = null, array $variables = [])
+    public function listUsersAsyncWithHttpInfo()
     {
         $returnType = '\blockmate\Model\User[]';
-        $request = $this->listUsersRequest($hostIndex, $variables);
+        $request = $this->listUsersRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2056,17 +1812,11 @@ class UserManagementApi
     /**
      * Create request for operation 'listUsers'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listUsersRequest(?int $hostIndex = null, array $variables = [])
+    public function listUsersRequest()
     {
 
         $resourcePath = '/v1/users';
@@ -2133,17 +1883,7 @@ class UserManagementApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForlistUsers();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
@@ -2154,41 +1894,20 @@ class UserManagementApi
     }
 
     /**
-     * Returns an array of host settings for Operation listUsers
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForlistUsers(): array
-    {
-        return [
-            [
-                "url" => "https://auth.blockmate.io",
-                "description" => "Authentication",
-            ]
-        ];
-    }
-
-    /**
      * Operation updateUser
      *
      * Update user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \blockmate\Model\User|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response|\blockmate\Model\GetUser404Response
      */
-    public function updateUser($id, $create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function updateUser($id, $create_user_request = null)
     {
-        list($response) = $this->updateUserWithHttpInfo($id, $create_user_request, $hostIndex, $variables);
+        list($response) = $this->updateUserWithHttpInfo($id, $create_user_request);
         return $response;
     }
 
@@ -2197,22 +1916,16 @@ class UserManagementApi
      *
      * Update user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \blockmate\Model\User|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response|\blockmate\Model\GetUser404Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateUserWithHttpInfo($id, $create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function updateUserWithHttpInfo($id, $create_user_request = null)
     {
-        $request = $this->updateUserRequest($id, $create_user_request, $hostIndex, $variables);
+        $request = $this->updateUserRequest($id, $create_user_request);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2388,21 +2101,15 @@ class UserManagementApi
      *
      * Update user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateUserAsync($id, $create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function updateUserAsync($id, $create_user_request = null)
     {
-        return $this->updateUserAsyncWithHttpInfo($id, $create_user_request, $hostIndex, $variables)
+        return $this->updateUserAsyncWithHttpInfo($id, $create_user_request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2415,22 +2122,16 @@ class UserManagementApi
      *
      * Update user
      *
-     * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-     * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateUserAsyncWithHttpInfo($id, $create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function updateUserAsyncWithHttpInfo($id, $create_user_request = null)
     {
         $returnType = '\blockmate\Model\User';
-        $request = $this->updateUserRequest($id, $create_user_request, $hostIndex, $variables);
+        $request = $this->updateUserRequest($id, $create_user_request);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2471,19 +2172,13 @@ class UserManagementApi
     /**
      * Create request for operation 'updateUser'
      *
-    * This operation contains host(s) defined in the OpenAPI spec. Use 'hostIndex' to select the host.
-    * if needed, use the 'variables' parameter to pass variables to the host.
-     * URL: https://auth.blockmate.io
-     *
      * @param  string $id User id (required)
      * @param  \blockmate\Model\CreateUserRequest $create_user_request User (optional)
-     * @param  null|int $hostIndex Host index. Defaults to null. If null, then the library will use $this->hostIndex instead
-     * @param  array $variables Associative array of variables to pass to the host. Defaults to empty array.
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateUserRequest($id, $create_user_request = null, ?int $hostIndex = null, array $variables = [])
+    public function updateUserRequest($id, $create_user_request = null)
     {
 
         // verify the required parameter 'id' is set
@@ -2572,17 +2267,7 @@ class UserManagementApi
             $headers
         );
 
-        # Preserve the original behavior of server indexing.
-        if ($hostIndex === null) {
-            $hostIndex = $this->hostIndex;
-        }
-
-        $hostSettings = $this->getHostSettingsForupdateUser();
-
-        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
-            throw new \InvalidArgumentException("Invalid index {$hostIndex} when selecting the host. Must be less than ".count($hostSettings));
-        }
-        $operationHost = Configuration::getHostString($hostSettings, $hostIndex, $variables);
+        $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
@@ -2590,21 +2275,6 @@ class UserManagementApi
             $headers,
             $httpBody
         );
-    }
-
-    /**
-     * Returns an array of host settings for Operation updateUser
-     *
-     * @return array an array of host settings
-     */
-    protected function getHostSettingsForupdateUser(): array
-    {
-        return [
-            [
-                "url" => "https://auth.blockmate.io",
-                "description" => "Authentication",
-            ]
-        ];
     }
 
     /**
