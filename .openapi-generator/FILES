@@ -19,6 +19,8 @@ docs/Model/AccountProviderHintFields.md
 docs/Model/AddressRiskReport.md
 docs/Model/AddressRiskReportDetails.md
 docs/Model/Amount.md
+docs/Model/Analytics.md
+docs/Model/Analytics1.md
 docs/Model/AuthUser200Response.md
 docs/Model/Balance200Response.md
 docs/Model/BalanceResponse.md
@@ -40,8 +42,6 @@ docs/Model/GetAccountHint404Response.md
 docs/Model/GetAddressFromDomain200Response.md
 docs/Model/GetAddressNameInfoSingle200Response.md
 docs/Model/GetAddressRiskScore200Response.md
-docs/Model/GetAnalytics200Response.md
-docs/Model/GetAnalytics200ResponseValue.md
 docs/Model/GetDomainFromAddress200Response.md
 docs/Model/GetDomainFromAddress200ResponseMetadata.md
 docs/Model/GetDomainFromAddress200ResponseMetadataAttributesInner.md
@@ -90,6 +90,8 @@ lib/Model/AccountProviderHintFields.php
 lib/Model/AddressRiskReport.php
 lib/Model/AddressRiskReportDetails.php
 lib/Model/Amount.php
+lib/Model/Analytics.php
+lib/Model/Analytics1.php
 lib/Model/AuthUser200Response.php
 lib/Model/Balance200Response.php
 lib/Model/BalanceResponse.php
@@ -111,8 +113,6 @@ lib/Model/GetAccountHint404Response.php
 lib/Model/GetAddressFromDomain200Response.php
 lib/Model/GetAddressNameInfoSingle200Response.php
 lib/Model/GetAddressRiskScore200Response.php
-lib/Model/GetAnalytics200Response.php
-lib/Model/GetAnalytics200ResponseValue.php
 lib/Model/GetDomainFromAddress200Response.php
 lib/Model/GetDomainFromAddress200ResponseMetadata.php
 lib/Model/GetDomainFromAddress200ResponseMetadataAttributesInner.php

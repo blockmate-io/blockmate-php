@@ -116,38 +116,38 @@ class AnalyticsApi
     }
 
     /**
-     * Operation getAnalytics
+     * Operation getAccountAnalytics
      *
-     * Get analytics focused on gaming
+     * Get analytics focused on gaming for specified account and provider
      *
      * @param  string $account_provider URL value from account_providers method (required)
      * @param  string $account_id Account ID (required)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \blockmate\Model\GetAnalytics200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
+     * @return \blockmate\Model\Analytics|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
      */
-    public function getAnalytics($account_provider, $account_id)
+    public function getAccountAnalytics($account_provider, $account_id)
     {
-        list($response) = $this->getAnalyticsWithHttpInfo($account_provider, $account_id);
+        list($response) = $this->getAccountAnalyticsWithHttpInfo($account_provider, $account_id);
         return $response;
     }
 
     /**
-     * Operation getAnalyticsWithHttpInfo
+     * Operation getAccountAnalyticsWithHttpInfo
      *
-     * Get analytics focused on gaming
+     * Get analytics focused on gaming for specified account and provider
      *
      * @param  string $account_provider URL value from account_providers method (required)
      * @param  string $account_id Account ID (required)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \blockmate\Model\GetAnalytics200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \blockmate\Model\Analytics|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAnalyticsWithHttpInfo($account_provider, $account_id)
+    public function getAccountAnalyticsWithHttpInfo($account_provider, $account_id)
     {
-        $request = $this->getAnalyticsRequest($account_provider, $account_id);
+        $request = $this->getAccountAnalyticsRequest($account_provider, $account_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -187,17 +187,17 @@ class AnalyticsApi
             switch($statusCode) {
             
                 case 200:
-                    if ('\blockmate\Model\GetAnalytics200Response' === '\SplFileObject') {
+                    if ('\blockmate\Model\Analytics' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\GetAnalytics200Response' !== 'string') {
+                        if ('\blockmate\Model\Analytics' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAnalytics200Response', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\Analytics', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -239,7 +239,7 @@ class AnalyticsApi
             
             }
 
-            $returnType = '\blockmate\Model\GetAnalytics200Response';
+            $returnType = '\blockmate\Model\Analytics';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -261,7 +261,7 @@ class AnalyticsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\GetAnalytics200Response',
+                        '\blockmate\Model\Analytics',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -294,9 +294,9 @@ class AnalyticsApi
     }
 
     /**
-     * Operation getAnalyticsAsync
+     * Operation getAccountAnalyticsAsync
      *
-     * Get analytics focused on gaming
+     * Get analytics focused on gaming for specified account and provider
      *
      * @param  string $account_provider URL value from account_providers method (required)
      * @param  string $account_id Account ID (required)
@@ -304,9 +304,9 @@ class AnalyticsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAnalyticsAsync($account_provider, $account_id)
+    public function getAccountAnalyticsAsync($account_provider, $account_id)
     {
-        return $this->getAnalyticsAsyncWithHttpInfo($account_provider, $account_id)
+        return $this->getAccountAnalyticsAsyncWithHttpInfo($account_provider, $account_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -315,9 +315,9 @@ class AnalyticsApi
     }
 
     /**
-     * Operation getAnalyticsAsyncWithHttpInfo
+     * Operation getAccountAnalyticsAsyncWithHttpInfo
      *
-     * Get analytics focused on gaming
+     * Get analytics focused on gaming for specified account and provider
      *
      * @param  string $account_provider URL value from account_providers method (required)
      * @param  string $account_id Account ID (required)
@@ -325,10 +325,10 @@ class AnalyticsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAnalyticsAsyncWithHttpInfo($account_provider, $account_id)
+    public function getAccountAnalyticsAsyncWithHttpInfo($account_provider, $account_id)
     {
-        $returnType = '\blockmate\Model\GetAnalytics200Response';
-        $request = $this->getAnalyticsRequest($account_provider, $account_id);
+        $returnType = '\blockmate\Model\Analytics';
+        $request = $this->getAccountAnalyticsRequest($account_provider, $account_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -367,7 +367,7 @@ class AnalyticsApi
     }
 
     /**
-     * Create request for operation 'getAnalytics'
+     * Create request for operation 'getAccountAnalytics'
      *
      * @param  string $account_provider URL value from account_providers method (required)
      * @param  string $account_id Account ID (required)
@@ -375,20 +375,20 @@ class AnalyticsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAnalyticsRequest($account_provider, $account_id)
+    public function getAccountAnalyticsRequest($account_provider, $account_id)
     {
 
         // verify the required parameter 'account_provider' is set
         if ($account_provider === null || (is_array($account_provider) && count($account_provider) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $account_provider when calling getAnalytics'
+                'Missing the required parameter $account_provider when calling getAccountAnalytics'
             );
         }
 
         // verify the required parameter 'account_id' is set
         if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $account_id when calling getAnalytics'
+                'Missing the required parameter $account_id when calling getAccountAnalytics'
             );
         }
 
@@ -417,6 +417,1004 @@ class AnalyticsApi
                 $resourcePath
             );
         }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getProjectAnalytics
+     *
+     * Get analytics focused on gaming for whole project
+     *
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array<string,\blockmate\Model\Analytics>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
+     */
+    public function getProjectAnalytics()
+    {
+        list($response) = $this->getProjectAnalyticsWithHttpInfo();
+        return $response;
+    }
+
+    /**
+     * Operation getProjectAnalyticsWithHttpInfo
+     *
+     * Get analytics focused on gaming for whole project
+     *
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of array<string,\blockmate\Model\Analytics>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getProjectAnalyticsWithHttpInfo()
+    {
+        $request = $this->getProjectAnalyticsRequest();
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+            
+                case 200:
+                    if ('array<string,\blockmate\Model\Analytics>' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('array<string,\blockmate\Model\Analytics>' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'array<string,\blockmate\Model\Analytics>', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+            
+                case 400:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject400Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\UserAPIAuthenticateProject400Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject400Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+                case 401:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject401Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\UserAPIAuthenticateProject401Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject401Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            }
+
+            $returnType = 'array<string,\blockmate\Model\Analytics>';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'array<string,\blockmate\Model\Analytics>',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+            
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\UserAPIAuthenticateProject400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\UserAPIAuthenticateProject401Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getProjectAnalyticsAsync
+     *
+     * Get analytics focused on gaming for whole project
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getProjectAnalyticsAsync()
+    {
+        return $this->getProjectAnalyticsAsyncWithHttpInfo()
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getProjectAnalyticsAsyncWithHttpInfo
+     *
+     * Get analytics focused on gaming for whole project
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getProjectAnalyticsAsyncWithHttpInfo()
+    {
+        $returnType = 'array<string,\blockmate\Model\Analytics>';
+        $request = $this->getProjectAnalyticsRequest();
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getProjectAnalytics'
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getProjectAnalyticsRequest()
+    {
+
+        $resourcePath = '/v1/analytics/project/stats';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getProviderAnalytics
+     *
+     * Get analytics focused on gaming for specified provider
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array<string,\blockmate\Model\Analytics>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
+     */
+    public function getProviderAnalytics($account_provider)
+    {
+        list($response) = $this->getProviderAnalyticsWithHttpInfo($account_provider);
+        return $response;
+    }
+
+    /**
+     * Operation getProviderAnalyticsWithHttpInfo
+     *
+     * Get analytics focused on gaming for specified provider
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of array<string,\blockmate\Model\Analytics>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getProviderAnalyticsWithHttpInfo($account_provider)
+    {
+        $request = $this->getProviderAnalyticsRequest($account_provider);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+            
+                case 200:
+                    if ('array<string,\blockmate\Model\Analytics>' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('array<string,\blockmate\Model\Analytics>' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'array<string,\blockmate\Model\Analytics>', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+            
+                case 400:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject400Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\UserAPIAuthenticateProject400Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject400Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+                case 401:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject401Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\UserAPIAuthenticateProject401Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject401Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            }
+
+            $returnType = 'array<string,\blockmate\Model\Analytics>';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'array<string,\blockmate\Model\Analytics>',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+            
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\UserAPIAuthenticateProject400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\UserAPIAuthenticateProject401Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getProviderAnalyticsAsync
+     *
+     * Get analytics focused on gaming for specified provider
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getProviderAnalyticsAsync($account_provider)
+    {
+        return $this->getProviderAnalyticsAsyncWithHttpInfo($account_provider)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getProviderAnalyticsAsyncWithHttpInfo
+     *
+     * Get analytics focused on gaming for specified provider
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getProviderAnalyticsAsyncWithHttpInfo($account_provider)
+    {
+        $returnType = 'array<string,\blockmate\Model\Analytics>';
+        $request = $this->getProviderAnalyticsRequest($account_provider);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getProviderAnalytics'
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getProviderAnalyticsRequest($account_provider)
+    {
+
+        // verify the required parameter 'account_provider' is set
+        if ($account_provider === null || (is_array($account_provider) && count($account_provider) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_provider when calling getProviderAnalytics'
+            );
+        }
+
+        $resourcePath = '/v1/analytics/{account_provider}/stats';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($account_provider !== null) {
+            $resourcePath = str_replace(
+                '{' . 'account_provider' . '}',
+                ObjectSerializer::toPathValue($account_provider),
+                $resourcePath
+            );
+        }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getUserAnalytics
+     *
+     * Get analytics focused on gaming for this user
+     *
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array<string,\blockmate\Model\Analytics>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
+     */
+    public function getUserAnalytics()
+    {
+        list($response) = $this->getUserAnalyticsWithHttpInfo();
+        return $response;
+    }
+
+    /**
+     * Operation getUserAnalyticsWithHttpInfo
+     *
+     * Get analytics focused on gaming for this user
+     *
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of array<string,\blockmate\Model\Analytics>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getUserAnalyticsWithHttpInfo()
+    {
+        $request = $this->getUserAnalyticsRequest();
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+            
+                case 200:
+                    if ('array<string,\blockmate\Model\Analytics>' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('array<string,\blockmate\Model\Analytics>' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'array<string,\blockmate\Model\Analytics>', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+            
+                case 400:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject400Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\UserAPIAuthenticateProject400Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject400Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+                case 401:
+                    if ('\blockmate\Model\UserAPIAuthenticateProject401Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\UserAPIAuthenticateProject401Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject401Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            }
+
+            $returnType = 'array<string,\blockmate\Model\Analytics>';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'array<string,\blockmate\Model\Analytics>',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+            
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\UserAPIAuthenticateProject400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\UserAPIAuthenticateProject401Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getUserAnalyticsAsync
+     *
+     * Get analytics focused on gaming for this user
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserAnalyticsAsync()
+    {
+        return $this->getUserAnalyticsAsyncWithHttpInfo()
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getUserAnalyticsAsyncWithHttpInfo
+     *
+     * Get analytics focused on gaming for this user
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getUserAnalyticsAsyncWithHttpInfo()
+    {
+        $returnType = 'array<string,\blockmate\Model\Analytics>';
+        $request = $this->getUserAnalyticsRequest();
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getUserAnalytics'
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUserAnalyticsRequest()
+    {
+
+        $resourcePath = '/v1/analytics/user/stats';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
 
 
         if ($multipart) {
