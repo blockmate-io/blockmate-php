@@ -15,7 +15,7 @@ getAnalytics($account_provider, $account_id): \blockmate\Model\GetAnalytics200Re
 
 Get analytics focused on gaming
 
-Get analytics focused on gaming. All empty values are omitted from the response.
+Get analytics focused on gaming. All empty values are omitted from the response. Values are recalculated once per day.
 
 ### Example
 

@@ -203,6 +203,7 @@ class AnalyticsApi
                     ];
             
             
+            
                 case 400:
                     if ('\blockmate\Model\UserAPIAuthenticateProject400Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -265,6 +266,7 @@ class AnalyticsApi
                     );
                     $e->setResponseObject($data);
                     break;
+            
             
             
                 case 400:
