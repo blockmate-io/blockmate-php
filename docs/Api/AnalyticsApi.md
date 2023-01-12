@@ -89,6 +89,9 @@ Get analytics focused on gaming for whole project. All empty values are omitted 
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: ProjectJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 // Configure Bearer (JWT) authorization: UserJWT
 $config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
@@ -118,7 +121,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[UserJWT](../../README.md#UserJWT)
+[ProjectJWT](../../README.md#ProjectJWT), [UserJWT](../../README.md#UserJWT)
 
 ### HTTP request headers
 

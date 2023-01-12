@@ -15,7 +15,7 @@ All URIs are relative to https://api.blockmate.io, except if the operation defin
 ## `accountProviderHintsList()`
 
 ```php
-accountProviderHintsList(): \blockmate\Model\AccountProviderHint
+accountProviderHintsList(): \blockmate\Model\AccountProviderHint[]
 ```
 
 Get list of account providers hints
@@ -52,7 +52,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\blockmate\Model\AccountProviderHint**](../Model/AccountProviderHint.md)
+[**\blockmate\Model\AccountProviderHint[]**](../Model/AccountProviderHint.md)
 
 ### Authorization
 
@@ -70,7 +70,7 @@ This endpoint does not need any parameter.
 ## `accountProvidersList()`
 
 ```php
-accountProvidersList(): \blockmate\Model\AccountProvider
+accountProvidersList(): \blockmate\Model\AccountProvider[]
 ```
 
 Get list of account providers
@@ -107,7 +107,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\blockmate\Model\AccountProvider**](../Model/AccountProvider.md)
+[**\blockmate\Model\AccountProvider[]**](../Model/AccountProvider.md)
 
 ### Authorization
 
@@ -180,7 +180,7 @@ This endpoint does not need any parameter.
 ## `balance()`
 
 ```php
-balance($currency): \blockmate\Model\Balance200Response
+balance($currency, $account_filter): \blockmate\Model\Balance200Response
 ```
 
 Get balance
@@ -203,9 +203,10 @@ $apiInstance = new blockmate\Api\AggregatedInfoApi(
     $config
 );
 $currency = USD; // string | Currency to convert to.
+$account_filter = 497f6eca-6276-4993-bfeb-53cbbbba6f08; // string | Filter results to only provided account. When omitted, it returns all transactions from all accounts.
 
 try {
-    $result = $apiInstance->balance($currency);
+    $result = $apiInstance->balance($currency, $account_filter);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AggregatedInfoApi->balance: ', $e->getMessage(), PHP_EOL;
@@ -217,6 +218,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **currency** | **string**| Currency to convert to. | [optional] |
+| **account_filter** | **string**| Filter results to only provided account. When omitted, it returns all transactions from all accounts. | [optional] |
 
 ### Return type
 

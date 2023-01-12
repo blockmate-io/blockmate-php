@@ -1,6 +1,6 @@
 <?php
 /**
- * DeleteUser404Response
+ * TransactionRiskReportDetailsValue
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \blockmate\ObjectSerializer;
 
 /**
- * DeleteUser404Response Class Doc Comment
+ * TransactionRiskReportDetailsValue Class Doc Comment
  *
  * @category Class
  * @package  blockmate
@@ -40,7 +40,7 @@ use \blockmate\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class TransactionRiskReportDetailsValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'DeleteUser_404_response';
+    protected static $openAPIModelName = 'TransactionRiskReport_details_value';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message' => 'string'
+        'own_categories' => '\blockmate\Model\RiskReportCategory[]',
+        'source_of_funds_categories' => '\blockmate\Model\RiskReportCategory[]'
     ];
 
     /**
@@ -68,7 +69,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'message' => null
+        'own_categories' => null,
+        'source_of_funds_categories' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'message' => false
+        'own_categories' => false,
+		'source_of_funds_categories' => false
     ];
 
     /**
@@ -156,7 +159,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message'
+        'own_categories' => 'own_categories',
+        'source_of_funds_categories' => 'source_of_funds_categories'
     ];
 
     /**
@@ -165,7 +169,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage'
+        'own_categories' => 'setOwnCategories',
+        'source_of_funds_categories' => 'setSourceOfFundsCategories'
     ];
 
     /**
@@ -174,7 +179,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage'
+        'own_categories' => 'getOwnCategories',
+        'source_of_funds_categories' => 'getSourceOfFundsCategories'
     ];
 
     /**
@@ -234,7 +240,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('own_categories', $data ?? [], null);
+        $this->setIfExists('source_of_funds_categories', $data ?? [], null);
     }
 
     /**
@@ -280,30 +287,59 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets message
+     * Gets own_categories
      *
-     * @return string|null
+     * @return \blockmate\Model\RiskReportCategory[]|null
      */
-    public function getMessage()
+    public function getOwnCategories()
     {
-        return $this->container['message'];
+        return $this->container['own_categories'];
     }
 
     /**
-     * Sets message
+     * Sets own_categories
      *
-     * @param string|null $message message
+     * @param \blockmate\Model\RiskReportCategory[]|null $own_categories own_categories
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setOwnCategories($own_categories)
     {
 
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($own_categories)) {
+            throw new \InvalidArgumentException('non-nullable own_categories cannot be null');
         }
 
-        $this->container['message'] = $message;
+        $this->container['own_categories'] = $own_categories;
+
+        return $this;
+    }
+
+    /**
+     * Gets source_of_funds_categories
+     *
+     * @return \blockmate\Model\RiskReportCategory[]|null
+     */
+    public function getSourceOfFundsCategories()
+    {
+        return $this->container['source_of_funds_categories'];
+    }
+
+    /**
+     * Sets source_of_funds_categories
+     *
+     * @param \blockmate\Model\RiskReportCategory[]|null $source_of_funds_categories source_of_funds_categories
+     *
+     * @return self
+     */
+    public function setSourceOfFundsCategories($source_of_funds_categories)
+    {
+
+        if (is_null($source_of_funds_categories)) {
+            throw new \InvalidArgumentException('non-nullable source_of_funds_categories cannot be null');
+        }
+
+        $this->container['source_of_funds_categories'] = $source_of_funds_categories;
 
         return $this;
     }

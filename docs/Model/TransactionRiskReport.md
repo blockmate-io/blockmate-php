@@ -10,6 +10,6 @@ Name | Type | Description | Notes
 **transaction** | **string** |  | [optional]
 **chain** | **string** |  |
 **risk** | **int** |  |
-**details** | [**array<string,\blockmate\Model\AddressRiskReportDetails>**](AddressRiskReportDetails.md) | Keys are addresses from transaction inputs or outputs |
+**details** | [**array<string,\blockmate\Model\TransactionRiskReportDetailsValue>**](TransactionRiskReportDetailsValue.md) | Keys are addresses from transaction inputs or outputs |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

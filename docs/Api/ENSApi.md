@@ -23,6 +23,9 @@ Get address for specified ENS domain
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: ProjectJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 // Configure Bearer (JWT) authorization: UserJWT
 $config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
@@ -55,7 +58,7 @@ try {
 
 ### Authorization
 
-[UserJWT](../../README.md#UserJWT)
+[ProjectJWT](../../README.md#ProjectJWT), [UserJWT](../../README.md#UserJWT)
 
 ### HTTP request headers
 
@@ -80,6 +83,9 @@ Get domain and metadata for specified ENS address
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+
+// Configure Bearer (JWT) authorization: ProjectJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 // Configure Bearer (JWT) authorization: UserJWT
 $config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
@@ -113,7 +119,7 @@ try {
 
 ### Authorization
 
-[UserJWT](../../README.md#UserJWT)
+[ProjectJWT](../../README.md#ProjectJWT), [UserJWT](../../README.md#UserJWT)
 
 ### HTTP request headers
 

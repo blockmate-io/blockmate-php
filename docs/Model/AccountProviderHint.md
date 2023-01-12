@@ -12,5 +12,6 @@ Name | Type | Description | Notes
 **intro** | **string** |  | [optional]
 **fields** | [**\blockmate\Model\AccountProviderHintFields**](AccountProviderHintFields.md) |  |
 **oauth** | **bool** |  |
+**icon** | **string** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

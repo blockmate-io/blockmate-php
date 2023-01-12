@@ -1,6 +1,6 @@
 <?php
 /**
- * DeleteUser404Response
+ * GetAddressNameInfoMulti200ResponseValue
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \blockmate\ObjectSerializer;
 
 /**
- * DeleteUser404Response Class Doc Comment
+ * GetAddressNameInfoMulti200ResponseValue Class Doc Comment
  *
  * @category Class
  * @package  blockmate
@@ -40,7 +40,7 @@ use \blockmate\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetAddressNameInfoMulti200ResponseValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'DeleteUser_404_response';
+    protected static $openAPIModelName = 'GetAddressNameInfoMulti_200_response_value';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message' => 'string'
+        'name' => 'string',
+        'category' => 'string'
     ];
 
     /**
@@ -68,7 +69,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'message' => null
+        'name' => null,
+        'category' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'message' => false
+        'name' => false,
+		'category' => false
     ];
 
     /**
@@ -156,7 +159,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message'
+        'name' => 'name',
+        'category' => 'category'
     ];
 
     /**
@@ -165,7 +169,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage'
+        'name' => 'setName',
+        'category' => 'setCategory'
     ];
 
     /**
@@ -174,7 +179,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage'
+        'name' => 'getName',
+        'category' => 'getCategory'
     ];
 
     /**
@@ -234,7 +240,8 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('category', $data ?? [], null);
     }
 
     /**
@@ -280,30 +287,59 @@ class DeleteUser404Response implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets message
+     * Gets name
      *
      * @return string|null
      */
-    public function getMessage()
+    public function getName()
     {
-        return $this->container['message'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets message
+     * Sets name
      *
-     * @param string|null $message message
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setName($name)
     {
 
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
 
-        $this->container['message'] = $message;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets category
+     *
+     * @return string|null
+     */
+    public function getCategory()
+    {
+        return $this->container['category'];
+    }
+
+    /**
+     * Sets category
+     *
+     * @param string|null $category category
+     *
+     * @return self
+     */
+    public function setCategory($category)
+    {
+
+        if (is_null($category)) {
+            throw new \InvalidArgumentException('non-nullable category cannot be null');
+        }
+
+        $this->container['category'] = $category;
 
         return $this;
     }

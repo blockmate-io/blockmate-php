@@ -1,6 +1,6 @@
 <?php
 /**
- * AddressNameAndCategoryInfoApi
+ * UserAccountManagementApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use blockmate\HeaderSelector;
 use blockmate\ObjectSerializer;
 
 /**
- * AddressNameAndCategoryInfoApi Class Doc Comment
+ * UserAccountManagementApi Class Doc Comment
  *
  * @category Class
  * @package  blockmate
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AddressNameAndCategoryInfoApi
+class UserAccountManagementApi
 {
     /**
      * @var ClientInterface
@@ -116,38 +116,38 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Operation getAddressNameInfoMulti
+     * Operation connectAccount
      *
-     * Get address name and category info for multiple addresses
+     * Connect new account
      *
-     * @param  string $chain Blockchain identifier (required)
-     * @param  string[] $request_body Addresses for which name and category should be returned (maximum of 5000 in one request) (optional)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
+     * @return \blockmate\Model\ConnectAccount200Response|\blockmate\Model\ConnectAccount400Response|\blockmate\Model\GetAccountHint403Response|\blockmate\Model\ConnectAccount405Response
      */
-    public function getAddressNameInfoMulti($chain, $request_body = null)
+    public function connectAccount($account_provider, $connect_account_request = null)
     {
-        list($response) = $this->getAddressNameInfoMultiWithHttpInfo($chain, $request_body);
+        list($response) = $this->connectAccountWithHttpInfo($account_provider, $connect_account_request);
         return $response;
     }
 
     /**
-     * Operation getAddressNameInfoMultiWithHttpInfo
+     * Operation connectAccountWithHttpInfo
      *
-     * Get address name and category info for multiple addresses
+     * Connect new account
      *
-     * @param  string $chain Blockchain identifier (required)
-     * @param  string[] $request_body Addresses for which name and category should be returned (maximum of 5000 in one request) (optional)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \blockmate\Model\ConnectAccount200Response|\blockmate\Model\ConnectAccount400Response|\blockmate\Model\GetAccountHint403Response|\blockmate\Model\ConnectAccount405Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAddressNameInfoMultiWithHttpInfo($chain, $request_body = null)
+    public function connectAccountWithHttpInfo($account_provider, $connect_account_request = null)
     {
-        $request = $this->getAddressNameInfoMultiRequest($chain, $request_body);
+        $request = $this->connectAccountRequest($account_provider, $connect_account_request);
 
         try {
             $options = $this->createHttpClientOption();
@@ -187,58 +187,75 @@ class AddressNameAndCategoryInfoApi
             switch($statusCode) {
             
                 case 200:
-                    if ('array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>' === '\SplFileObject') {
+                    if ('\blockmate\Model\ConnectAccount200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>' !== 'string') {
+                        if ('\blockmate\Model\ConnectAccount200Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\ConnectAccount200Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             
             
                 case 400:
-                    if ('\blockmate\Model\UserAPIAuthenticateProject400Response' === '\SplFileObject') {
+                    if ('\blockmate\Model\ConnectAccount400Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\UserAPIAuthenticateProject400Response' !== 'string') {
+                        if ('\blockmate\Model\ConnectAccount400Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject400Response', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\ConnectAccount400Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             
             
-                case 401:
-                    if ('\blockmate\Model\UserAPIAuthenticateProject401Response' === '\SplFileObject') {
+                case 403:
+                    if ('\blockmate\Model\GetAccountHint403Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\blockmate\Model\UserAPIAuthenticateProject401Response' !== 'string') {
+                        if ('\blockmate\Model\GetAccountHint403Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject401Response', []),
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAccountHint403Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+                case 405:
+                    if ('\blockmate\Model\ConnectAccount405Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\ConnectAccount405Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\ConnectAccount405Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             
             }
 
-            $returnType = 'array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>';
+            $returnType = '\blockmate\Model\ConnectAccount200Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -260,7 +277,7 @@ class AddressNameAndCategoryInfoApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>',
+                        '\blockmate\Model\ConnectAccount200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -270,17 +287,27 @@ class AddressNameAndCategoryInfoApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\UserAPIAuthenticateProject400Response',
+                        '\blockmate\Model\ConnectAccount400Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
             
             
-                case 401:
+                case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\UserAPIAuthenticateProject401Response',
+                        '\blockmate\Model\GetAccountHint403Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+                case 405:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\ConnectAccount405Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -292,19 +319,19 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Operation getAddressNameInfoMultiAsync
+     * Operation connectAccountAsync
      *
-     * Get address name and category info for multiple addresses
+     * Connect new account
      *
-     * @param  string $chain Blockchain identifier (required)
-     * @param  string[] $request_body Addresses for which name and category should be returned (maximum of 5000 in one request) (optional)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressNameInfoMultiAsync($chain, $request_body = null)
+    public function connectAccountAsync($account_provider, $connect_account_request = null)
     {
-        return $this->getAddressNameInfoMultiAsyncWithHttpInfo($chain, $request_body)
+        return $this->connectAccountAsyncWithHttpInfo($account_provider, $connect_account_request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -313,20 +340,20 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Operation getAddressNameInfoMultiAsyncWithHttpInfo
+     * Operation connectAccountAsyncWithHttpInfo
      *
-     * Get address name and category info for multiple addresses
+     * Connect new account
      *
-     * @param  string $chain Blockchain identifier (required)
-     * @param  string[] $request_body Addresses for which name and category should be returned (maximum of 5000 in one request) (optional)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressNameInfoMultiAsyncWithHttpInfo($chain, $request_body = null)
+    public function connectAccountAsyncWithHttpInfo($account_provider, $connect_account_request = null)
     {
-        $returnType = 'array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>';
-        $request = $this->getAddressNameInfoMultiRequest($chain, $request_body);
+        $returnType = '\blockmate\Model\ConnectAccount200Response';
+        $request = $this->connectAccountRequest($account_provider, $connect_account_request);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -365,43 +392,42 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Create request for operation 'getAddressNameInfoMulti'
+     * Create request for operation 'connectAccount'
      *
-     * @param  string $chain Blockchain identifier (required)
-     * @param  string[] $request_body Addresses for which name and category should be returned (maximum of 5000 in one request) (optional)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  \blockmate\Model\ConnectAccountRequest $connect_account_request OK (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAddressNameInfoMultiRequest($chain, $request_body = null)
+    public function connectAccountRequest($account_provider, $connect_account_request = null)
     {
 
-        // verify the required parameter 'chain' is set
-        if ($chain === null || (is_array($chain) && count($chain) === 0)) {
+        // verify the required parameter 'account_provider' is set
+        if ($account_provider === null || (is_array($account_provider) && count($account_provider) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $chain when calling getAddressNameInfoMulti'
+                'Missing the required parameter $account_provider when calling connectAccount'
             );
         }
 
 
-        $resourcePath = '/v1/addressname/multi';
+        $resourcePath = '/v1/{account_provider}/connect';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $chain,
-            'chain', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
 
 
+        // path params
+        if ($account_provider !== null) {
+            $resourcePath = str_replace(
+                '{' . 'account_provider' . '}',
+                ObjectSerializer::toPathValue($account_provider),
+                $resourcePath
+            );
+        }
 
 
         if ($multipart) {
@@ -416,11 +442,11 @@ class AddressNameAndCategoryInfoApi
         }
 
         // for model (json/xml)
-        if (isset($request_body)) {
+        if (isset($connect_account_request)) {
             if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($request_body));
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($connect_account_request));
             } else {
-                $httpBody = $request_body;
+                $httpBody = $connect_account_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -450,10 +476,6 @@ class AddressNameAndCategoryInfoApi
         if (!empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
@@ -477,38 +499,37 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Operation getAddressNameInfoSingle
+     * Operation deleteAccount
      *
-     * Get address name and category info for single address
+     * Delete account
      *
-     * @param  string $address Address for which name and category should be returned (required)
-     * @param  string $chain Blockchain identifier (required)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $account_id Account ID (required)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \blockmate\Model\GetAddressNameInfoSingle200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response
+     * @return void
      */
-    public function getAddressNameInfoSingle($address, $chain)
+    public function deleteAccount($account_provider, $account_id)
     {
-        list($response) = $this->getAddressNameInfoSingleWithHttpInfo($address, $chain);
-        return $response;
+        $this->deleteAccountWithHttpInfo($account_provider, $account_id);
     }
 
     /**
-     * Operation getAddressNameInfoSingleWithHttpInfo
+     * Operation deleteAccountWithHttpInfo
      *
-     * Get address name and category info for single address
+     * Delete account
      *
-     * @param  string $address Address for which name and category should be returned (required)
-     * @param  string $chain Blockchain identifier (required)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $account_id Account ID (required)
      *
      * @throws \blockmate\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \blockmate\Model\GetAddressNameInfoSingle200Response|\blockmate\Model\UserAPIAuthenticateProject400Response|\blockmate\Model\UserAPIAuthenticateProject401Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAddressNameInfoSingleWithHttpInfo($address, $chain)
+    public function deleteAccountWithHttpInfo($account_provider, $account_id)
     {
-        $request = $this->getAddressNameInfoSingleRequest($address, $chain);
+        $request = $this->deleteAccountRequest($account_provider, $account_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -545,103 +566,26 @@ class AddressNameAndCategoryInfoApi
                 );
             }
 
-            switch($statusCode) {
-            
-                case 200:
-                    if ('\blockmate\Model\GetAddressNameInfoSingle200Response' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\blockmate\Model\GetAddressNameInfoSingle200Response' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAddressNameInfoSingle200Response', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            
-            
-                case 400:
-                    if ('\blockmate\Model\UserAPIAuthenticateProject400Response' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\blockmate\Model\UserAPIAuthenticateProject400Response' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject400Response', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            
-            
-                case 401:
-                    if ('\blockmate\Model\UserAPIAuthenticateProject401Response' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\blockmate\Model\UserAPIAuthenticateProject401Response' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\blockmate\Model\UserAPIAuthenticateProject401Response', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            
-            }
-
-            $returnType = '\blockmate\Model\GetAddressNameInfoSingle200Response';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
+            return [null, $statusCode, $response->getHeaders()];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             
-                case 200:
+            
+                case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\GetAddressNameInfoSingle200Response',
+                        '\blockmate\Model\GetAccountHint403Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
             
             
-                case 400:
+                case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\blockmate\Model\UserAPIAuthenticateProject400Response',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            
-            
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\blockmate\Model\UserAPIAuthenticateProject401Response',
+                        '\blockmate\Model\DeleteAccount404Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -653,19 +597,19 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Operation getAddressNameInfoSingleAsync
+     * Operation deleteAccountAsync
      *
-     * Get address name and category info for single address
+     * Delete account
      *
-     * @param  string $address Address for which name and category should be returned (required)
-     * @param  string $chain Blockchain identifier (required)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $account_id Account ID (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressNameInfoSingleAsync($address, $chain)
+    public function deleteAccountAsync($account_provider, $account_id)
     {
-        return $this->getAddressNameInfoSingleAsyncWithHttpInfo($address, $chain)
+        return $this->deleteAccountAsyncWithHttpInfo($account_provider, $account_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -674,39 +618,26 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Operation getAddressNameInfoSingleAsyncWithHttpInfo
+     * Operation deleteAccountAsyncWithHttpInfo
      *
-     * Get address name and category info for single address
+     * Delete account
      *
-     * @param  string $address Address for which name and category should be returned (required)
-     * @param  string $chain Blockchain identifier (required)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $account_id Account ID (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAddressNameInfoSingleAsyncWithHttpInfo($address, $chain)
+    public function deleteAccountAsyncWithHttpInfo($account_provider, $account_id)
     {
-        $returnType = '\blockmate\Model\GetAddressNameInfoSingle200Response';
-        $request = $this->getAddressNameInfoSingleRequest($address, $chain);
+        $returnType = '';
+        $request = $this->deleteAccountRequest($account_provider, $account_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -726,58 +657,56 @@ class AddressNameAndCategoryInfoApi
     }
 
     /**
-     * Create request for operation 'getAddressNameInfoSingle'
+     * Create request for operation 'deleteAccount'
      *
-     * @param  string $address Address for which name and category should be returned (required)
-     * @param  string $chain Blockchain identifier (required)
+     * @param  string $account_provider URL value from account_providers method (required)
+     * @param  string $account_id Account ID (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAddressNameInfoSingleRequest($address, $chain)
+    public function deleteAccountRequest($account_provider, $account_id)
     {
 
-        // verify the required parameter 'address' is set
-        if ($address === null || (is_array($address) && count($address) === 0)) {
+        // verify the required parameter 'account_provider' is set
+        if ($account_provider === null || (is_array($account_provider) && count($account_provider) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $address when calling getAddressNameInfoSingle'
+                'Missing the required parameter $account_provider when calling deleteAccount'
             );
         }
 
-        // verify the required parameter 'chain' is set
-        if ($chain === null || (is_array($chain) && count($chain) === 0)) {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $chain when calling getAddressNameInfoSingle'
+                'Missing the required parameter $account_id when calling deleteAccount'
             );
         }
 
-        $resourcePath = '/v1/addressname/simple';
+        $resourcePath = '/v1/{account_provider}/account/{account_id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $address,
-            'address', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $chain,
-            'chain', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
 
 
+        // path params
+        if ($account_provider !== null) {
+            $resourcePath = str_replace(
+                '{' . 'account_provider' . '}',
+                ObjectSerializer::toPathValue($account_provider),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'account_id' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
 
 
         if ($multipart) {
@@ -820,6 +749,346 @@ class AddressNameAndCategoryInfoApi
         if (!empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getAccountHint
+     *
+     * Get account hint
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \blockmate\Model\GetAccountHint200Response|\blockmate\Model\GetAccountHint403Response|\blockmate\Model\GetAccountHint404Response
+     */
+    public function getAccountHint($account_provider)
+    {
+        list($response) = $this->getAccountHintWithHttpInfo($account_provider);
+        return $response;
+    }
+
+    /**
+     * Operation getAccountHintWithHttpInfo
+     *
+     * Get account hint
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \blockmate\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \blockmate\Model\GetAccountHint200Response|\blockmate\Model\GetAccountHint403Response|\blockmate\Model\GetAccountHint404Response, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAccountHintWithHttpInfo($account_provider)
+    {
+        $request = $this->getAccountHintRequest($account_provider);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+            
+                case 200:
+                    if ('\blockmate\Model\GetAccountHint200Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\GetAccountHint200Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAccountHint200Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+                case 403:
+                    if ('\blockmate\Model\GetAccountHint403Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\GetAccountHint403Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAccountHint403Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            
+                case 404:
+                    if ('\blockmate\Model\GetAccountHint404Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\blockmate\Model\GetAccountHint404Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\blockmate\Model\GetAccountHint404Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            
+            }
+
+            $returnType = '\blockmate\Model\GetAccountHint200Response';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\GetAccountHint200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\GetAccountHint403Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\blockmate\Model\GetAccountHint404Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAccountHintAsync
+     *
+     * Get account hint
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountHintAsync($account_provider)
+    {
+        return $this->getAccountHintAsyncWithHttpInfo($account_provider)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAccountHintAsyncWithHttpInfo
+     *
+     * Get account hint
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountHintAsyncWithHttpInfo($account_provider)
+    {
+        $returnType = '\blockmate\Model\GetAccountHint200Response';
+        $request = $this->getAccountHintRequest($account_provider);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAccountHint'
+     *
+     * @param  string $account_provider URL value from account_providers method (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAccountHintRequest($account_provider)
+    {
+
+        // verify the required parameter 'account_provider' is set
+        if ($account_provider === null || (is_array($account_provider) && count($account_provider) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_provider when calling getAccountHint'
+            );
+        }
+
+        $resourcePath = '/v1/{account_provider}/connect';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($account_provider !== null) {
+            $resourcePath = str_replace(
+                '{' . 'account_provider' . '}',
+                ObjectSerializer::toPathValue($account_provider),
+                $resourcePath
+            );
+        }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
         // this endpoint requires Bearer (JWT) authentication (access token)
         if (!empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();

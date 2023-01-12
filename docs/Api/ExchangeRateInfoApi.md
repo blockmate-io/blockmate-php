@@ -23,6 +23,9 @@ Get current exchange rate
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: ProjectJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 // Configure Bearer (JWT) authorization: UserJWT
 $config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
@@ -33,7 +36,7 @@ $apiInstance = new blockmate\Api\ExchangeRateInfoApi(
     new GuzzleHttp\Client(),
     $config
 );
-$pairs = ETH/USD,BTC/EUR; // string | Currency pairs for which exchange rate should be returned
+$pairs = ETH/USD,BTC/EUR; // string | Currency pairs for which exchange rate should be returned (max 20 per request)
 
 try {
     $result = $apiInstance->getCurrentExchangeRate($pairs);
@@ -47,7 +50,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **pairs** | **string**| Currency pairs for which exchange rate should be returned | |
+| **pairs** | **string**| Currency pairs for which exchange rate should be returned (max 20 per request) | |
 
 ### Return type
 
@@ -55,7 +58,7 @@ try {
 
 ### Authorization
 
-[UserJWT](../../README.md#UserJWT)
+[ProjectJWT](../../README.md#ProjectJWT), [UserJWT](../../README.md#UserJWT)
 
 ### HTTP request headers
 
@@ -81,6 +84,9 @@ Get historical exchange rate
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: ProjectJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 // Configure Bearer (JWT) authorization: UserJWT
 $config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
@@ -92,7 +98,7 @@ $apiInstance = new blockmate\Api\ExchangeRateInfoApi(
     $config
 );
 $pair = ETH/USD; // string | Currency pair for which exchange rates should be returned
-$days = 2022-06-30,2022-06-29; // string | Historical dates for which exchange rates should be returned
+$days = 2022-06-30,2022-06-29; // string | Historical dates for which exchange rates should be returned (max 40 per request)
 
 try {
     $result = $apiInstance->getHistoricalExchangeRate($pair, $days);
@@ -107,7 +113,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **pair** | **string**| Currency pair for which exchange rates should be returned | |
-| **days** | **string**| Historical dates for which exchange rates should be returned | |
+| **days** | **string**| Historical dates for which exchange rates should be returned (max 40 per request) | |
 
 ### Return type
 
@@ -115,7 +121,7 @@ try {
 
 ### Authorization
 
-[UserJWT](../../README.md#UserJWT)
+[ProjectJWT](../../README.md#ProjectJWT), [UserJWT](../../README.md#UserJWT)
 
 ### HTTP request headers
 

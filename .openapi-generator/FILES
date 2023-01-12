@@ -3,7 +3,6 @@
 .travis.yml
 README.md
 composer.json
-docs/Api/AccountProviderInfoApi.md
 docs/Api/AddressNameAndCategoryInfoApi.md
 docs/Api/AggregatedInfoApi.md
 docs/Api/AnalyticsApi.md
@@ -11,6 +10,7 @@ docs/Api/AuthenticationApi.md
 docs/Api/ENSApi.md
 docs/Api/ExchangeRateInfoApi.md
 docs/Api/RiskInfoApi.md
+docs/Api/UserAccountManagementApi.md
 docs/Api/UserManagementApi.md
 docs/Model/Account.md
 docs/Model/AccountProvider.md
@@ -40,6 +40,7 @@ docs/Model/GetAccountHint200ResponseFields.md
 docs/Model/GetAccountHint403Response.md
 docs/Model/GetAccountHint404Response.md
 docs/Model/GetAddressFromDomain200Response.md
+docs/Model/GetAddressNameInfoMulti200ResponseValue.md
 docs/Model/GetAddressNameInfoSingle200Response.md
 docs/Model/GetAddressRiskScore200Response.md
 docs/Model/GetDomainFromAddress200Response.md
@@ -64,6 +65,7 @@ docs/Model/OwnedNftMedia.md
 docs/Model/RiskReportCategory.md
 docs/Model/Transaction.md
 docs/Model/TransactionRiskReport.md
+docs/Model/TransactionRiskReportDetailsValue.md
 docs/Model/Transactions200Response.md
 docs/Model/Transactions200ResponseAccountsInner.md
 docs/Model/User.md
@@ -71,7 +73,6 @@ docs/Model/UserAPIAuthenticateProject200Response.md
 docs/Model/UserAPIAuthenticateProject400Response.md
 docs/Model/UserAPIAuthenticateProject401Response.md
 git_push.sh
-lib/Api/AccountProviderInfoApi.php
 lib/Api/AddressNameAndCategoryInfoApi.php
 lib/Api/AggregatedInfoApi.php
 lib/Api/AnalyticsApi.php
@@ -79,6 +80,7 @@ lib/Api/AuthenticationApi.php
 lib/Api/ENSApi.php
 lib/Api/ExchangeRateInfoApi.php
 lib/Api/RiskInfoApi.php
+lib/Api/UserAccountManagementApi.php
 lib/Api/UserManagementApi.php
 lib/ApiException.php
 lib/Configuration.php
@@ -111,6 +113,7 @@ lib/Model/GetAccountHint200ResponseFields.php
 lib/Model/GetAccountHint403Response.php
 lib/Model/GetAccountHint404Response.php
 lib/Model/GetAddressFromDomain200Response.php
+lib/Model/GetAddressNameInfoMulti200ResponseValue.php
 lib/Model/GetAddressNameInfoSingle200Response.php
 lib/Model/GetAddressRiskScore200Response.php
 lib/Model/GetDomainFromAddress200Response.php
@@ -136,6 +139,7 @@ lib/Model/OwnedNftMedia.php
 lib/Model/RiskReportCategory.php
 lib/Model/Transaction.php
 lib/Model/TransactionRiskReport.php
+lib/Model/TransactionRiskReportDetailsValue.php
 lib/Model/Transactions200Response.php
 lib/Model/Transactions200ResponseAccountsInner.php
 lib/Model/User.php

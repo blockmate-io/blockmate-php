@@ -49,26 +49,27 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-// Configure API key authorization: ProjectToken
-$config = blockmate\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = blockmate\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+// Configure Bearer (JWT) authorization: ProjectJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+// Configure Bearer (JWT) authorization: UserJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 
-$apiInstance = new blockmate\Api\AccountProviderInfoApi(
+$apiInstance = new blockmate\Api\AddressNameAndCategoryInfoApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$account_provider = onchain/btc; // string | URL value from account_providers method
-$connect_account_request = new \blockmate\Model\ConnectAccountRequest(); // \blockmate\Model\ConnectAccountRequest | OK
+$chain = btc; // string | Blockchain identifier
+$request_body = array('request_body_example'); // string[] | Addresses for which name and category should be returned (maximum of 5000 in one request)
 
 try {
-    $result = $apiInstance->connectAccount($account_provider, $connect_account_request);
+    $result = $apiInstance->getAddressNameInfoMulti($chain, $request_body);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AccountProviderInfoApi->connectAccount: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AddressNameAndCategoryInfoApi->getAddressNameInfoMulti: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -79,9 +80,6 @@ All URIs are relative to *https://api.blockmate.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AccountProviderInfoApi* | [**connectAccount**](docs/Api/AccountProviderInfoApi.md#connectaccount) | **POST** /v1/{account_provider}/connect | Connect new account
-*AccountProviderInfoApi* | [**deleteAccount**](docs/Api/AccountProviderInfoApi.md#deleteaccount) | **DELETE** /v1/{account_provider}/account/{account_id} | Delete account
-*AccountProviderInfoApi* | [**getAccountHint**](docs/Api/AccountProviderInfoApi.md#getaccounthint) | **GET** /v1/{account_provider}/connect | Get account hint
 *AddressNameAndCategoryInfoApi* | [**getAddressNameInfoMulti**](docs/Api/AddressNameAndCategoryInfoApi.md#getaddressnameinfomulti) | **POST** /v1/addressname/multi | Get address name and category info for multiple addresses
 *AddressNameAndCategoryInfoApi* | [**getAddressNameInfoSingle**](docs/Api/AddressNameAndCategoryInfoApi.md#getaddressnameinfosingle) | **GET** /v1/addressname/simple | Get address name and category info for single address
 *AggregatedInfoApi* | [**accountProviderHintsList**](docs/Api/AggregatedInfoApi.md#accountproviderhintslist) | **GET** /v1/aggregate/account_provider_hints | Get list of account providers hints
@@ -103,9 +101,13 @@ Class | Method | HTTP request | Description
 *RiskInfoApi* | [**getAddressRiskScore**](docs/Api/RiskInfoApi.md#getaddressriskscore) | **GET** /v1/risk/score | Get address risk score
 *RiskInfoApi* | [**getAddressRiskScoreCase**](docs/Api/RiskInfoApi.md#getaddressriskscorecase) | **GET** /v1/risk/score/details/{case_id} | Get address risk score case
 *RiskInfoApi* | [**getAddressRiskScoreDetails**](docs/Api/RiskInfoApi.md#getaddressriskscoredetails) | **GET** /v1/risk/score/details | Get address risk score details
+*RiskInfoApi* | [**getMultipleAddressRiskScore**](docs/Api/RiskInfoApi.md#getmultipleaddressriskscore) | **POST** /v1/risk/score | Get multiple risk scores for addresses
 *RiskInfoApi* | [**getTransactionRiskScore**](docs/Api/RiskInfoApi.md#gettransactionriskscore) | **GET** /v1/risk/transaction/score | Get transaction risk score
 *RiskInfoApi* | [**getTransactionRiskScoreCase**](docs/Api/RiskInfoApi.md#gettransactionriskscorecase) | **GET** /v1/risk/transaction/score/details/{case_id} | Get transaction risk score case
 *RiskInfoApi* | [**getTransactionRiskScoreDetails**](docs/Api/RiskInfoApi.md#gettransactionriskscoredetails) | **GET** /v1/risk/transaction/score/details | Get transaction risk score details
+*UserAccountManagementApi* | [**connectAccount**](docs/Api/UserAccountManagementApi.md#connectaccount) | **POST** /v1/{account_provider}/connect | Connect new account
+*UserAccountManagementApi* | [**deleteAccount**](docs/Api/UserAccountManagementApi.md#deleteaccount) | **DELETE** /v1/{account_provider}/account/{account_id} | Delete account
+*UserAccountManagementApi* | [**getAccountHint**](docs/Api/UserAccountManagementApi.md#getaccounthint) | **GET** /v1/{account_provider}/connect | Get account hint
 *UserManagementApi* | [**authUser**](docs/Api/UserManagementApi.md#authuser) | **GET** /v1/users/{id}/auth | Authenticate user
 *UserManagementApi* | [**createUser**](docs/Api/UserManagementApi.md#createuser) | **POST** /v1/users | Create user
 *UserManagementApi* | [**deleteUser**](docs/Api/UserManagementApi.md#deleteuser) | **DELETE** /v1/users/{id} | Delete user
@@ -143,6 +145,7 @@ Class | Method | HTTP request | Description
 - [GetAccountHint403Response](docs/Model/GetAccountHint403Response.md)
 - [GetAccountHint404Response](docs/Model/GetAccountHint404Response.md)
 - [GetAddressFromDomain200Response](docs/Model/GetAddressFromDomain200Response.md)
+- [GetAddressNameInfoMulti200ResponseValue](docs/Model/GetAddressNameInfoMulti200ResponseValue.md)
 - [GetAddressNameInfoSingle200Response](docs/Model/GetAddressNameInfoSingle200Response.md)
 - [GetAddressRiskScore200Response](docs/Model/GetAddressRiskScore200Response.md)
 - [GetDomainFromAddress200Response](docs/Model/GetDomainFromAddress200Response.md)
@@ -167,6 +170,7 @@ Class | Method | HTTP request | Description
 - [RiskReportCategory](docs/Model/RiskReportCategory.md)
 - [Transaction](docs/Model/Transaction.md)
 - [TransactionRiskReport](docs/Model/TransactionRiskReport.md)
+- [TransactionRiskReportDetailsValue](docs/Model/TransactionRiskReportDetailsValue.md)
 - [Transactions200Response](docs/Model/Transactions200Response.md)
 - [Transactions200ResponseAccountsInner](docs/Model/Transactions200ResponseAccountsInner.md)
 - [User](docs/Model/User.md)
@@ -210,5 +214,5 @@ vendor/bin/phpunit
 
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: `0.0.1`
+- API version: `0.0.2`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

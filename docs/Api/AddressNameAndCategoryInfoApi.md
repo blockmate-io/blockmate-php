@@ -11,7 +11,7 @@ All URIs are relative to https://api.blockmate.io, except if the operation defin
 ## `getAddressNameInfoMulti()`
 
 ```php
-getAddressNameInfoMulti($chain, $request_body): array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>
+getAddressNameInfoMulti($chain, $request_body): array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>
 ```
 
 Get address name and category info for multiple addresses
@@ -22,6 +22,9 @@ Get address name and category info for multiple addresses
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+
+// Configure Bearer (JWT) authorization: ProjectJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 // Configure Bearer (JWT) authorization: UserJWT
 $config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
@@ -34,7 +37,7 @@ $apiInstance = new blockmate\Api\AddressNameAndCategoryInfoApi(
     $config
 );
 $chain = btc; // string | Blockchain identifier
-$request_body = array('request_body_example'); // string[] | OK
+$request_body = array('request_body_example'); // string[] | Addresses for which name and category should be returned (maximum of 5000 in one request)
 
 try {
     $result = $apiInstance->getAddressNameInfoMulti($chain, $request_body);
@@ -49,15 +52,15 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **chain** | **string**| Blockchain identifier | |
-| **request_body** | [**string[]**](../Model/string.md)| OK | [optional] |
+| **request_body** | [**string[]**](../Model/string.md)| Addresses for which name and category should be returned (maximum of 5000 in one request) | [optional] |
 
 ### Return type
 
-[**array<string,\blockmate\Model\GetAddressNameInfoSingle200Response>**](../Model/GetAddressNameInfoSingle200Response.md)
+[**array<string,\blockmate\Model\GetAddressNameInfoMulti200ResponseValue>**](../Model/GetAddressNameInfoMulti200ResponseValue.md)
 
 ### Authorization
 
-[UserJWT](../../README.md#UserJWT)
+[ProjectJWT](../../README.md#ProjectJWT), [UserJWT](../../README.md#UserJWT)
 
 ### HTTP request headers
 
@@ -82,6 +85,9 @@ Get address name and category info for single address
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+
+// Configure Bearer (JWT) authorization: ProjectJWT
+$config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
 
 // Configure Bearer (JWT) authorization: UserJWT
 $config = blockmate\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
@@ -117,7 +123,7 @@ try {
 
 ### Authorization
 
-[UserJWT](../../README.md#UserJWT)
+[ProjectJWT](../../README.md#ProjectJWT), [UserJWT](../../README.md#UserJWT)
 
 ### HTTP request headers
 
