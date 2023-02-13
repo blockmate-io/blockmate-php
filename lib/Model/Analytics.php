@@ -118,30 +118,30 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
         'count_txs_out_7_nft' => 'int',
         'count_txs_out_7_gaming' => 'int',
         'count_txs_out_7_gambling' => 'int',
-        'first_txs_all_onchain' => 'string',
-        'first_txs_all_nft' => 'string',
-        'first_txs_all_gaming' => 'string',
-        'first_txs_all_gambling' => 'string',
-        'first_txs_in_onchain' => 'string',
-        'first_txs_in_nft' => 'string',
-        'first_txs_in_gaming' => 'string',
-        'first_txs_in_gambling' => 'string',
-        'first_txs_out_onchain' => 'string',
-        'first_txs_out_nft' => 'string',
-        'first_txs_out_gaming' => 'string',
-        'first_txs_out_gambling' => 'string',
-        'last_txs_all_onchain' => 'string',
-        'last_txs_all_nft' => 'string',
-        'last_txs_all_gaming' => 'string',
-        'last_txs_all_gambling' => 'string',
-        'last_txs_in_onchain' => 'string',
-        'last_txs_in_nft' => 'string',
-        'last_txs_in_gaming' => 'string',
-        'last_txs_in_gambling' => 'string',
-        'last_txs_out_onchain' => 'string',
-        'last_txs_out_nft' => 'string',
-        'last_txs_out_gaming' => 'string',
-        'last_txs_out_gambling' => 'string'
+        'first_txs_all_onchain' => 'int',
+        'first_txs_all_nft' => 'int',
+        'first_txs_all_gaming' => 'int',
+        'first_txs_all_gambling' => 'int',
+        'first_txs_in_onchain' => 'int',
+        'first_txs_in_nft' => 'int',
+        'first_txs_in_gaming' => 'int',
+        'first_txs_in_gambling' => 'int',
+        'first_txs_out_onchain' => 'int',
+        'first_txs_out_nft' => 'int',
+        'first_txs_out_gaming' => 'int',
+        'first_txs_out_gambling' => 'int',
+        'last_txs_all_onchain' => 'int',
+        'last_txs_all_nft' => 'int',
+        'last_txs_all_gaming' => 'int',
+        'last_txs_all_gambling' => 'int',
+        'last_txs_in_onchain' => 'int',
+        'last_txs_in_nft' => 'int',
+        'last_txs_in_gaming' => 'int',
+        'last_txs_in_gambling' => 'int',
+        'last_txs_out_onchain' => 'int',
+        'last_txs_out_nft' => 'int',
+        'last_txs_out_gaming' => 'int',
+        'last_txs_out_gambling' => 'int'
     ];
 
     /**
@@ -2604,7 +2604,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_all_onchain
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsAllOnchain()
     {
@@ -2614,7 +2614,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_all_onchain
      *
-     * @param string|null $first_txs_all_onchain Time when first transaction occurred
+     * @param int|null $first_txs_all_onchain Unix timestamp when first transaction occurred
      *
      * @return self
      */
@@ -2633,7 +2633,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_all_nft
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsAllNft()
     {
@@ -2643,7 +2643,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_all_nft
      *
-     * @param string|null $first_txs_all_nft Time when first NFT transaction occurred
+     * @param int|null $first_txs_all_nft Unix timestamp when first NFT transaction occurred
      *
      * @return self
      */
@@ -2662,7 +2662,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_all_gaming
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsAllGaming()
     {
@@ -2672,7 +2672,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_all_gaming
      *
-     * @param string|null $first_txs_all_gaming Time when first gaming transaction occurred
+     * @param int|null $first_txs_all_gaming Unix timestamp when first gaming transaction occurred
      *
      * @return self
      */
@@ -2691,7 +2691,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_all_gambling
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsAllGambling()
     {
@@ -2701,7 +2701,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_all_gambling
      *
-     * @param string|null $first_txs_all_gambling Time when first gambling transaction occurred
+     * @param int|null $first_txs_all_gambling Unix timestamp when first gambling transaction occurred
      *
      * @return self
      */
@@ -2720,7 +2720,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_in_onchain
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsInOnchain()
     {
@@ -2730,7 +2730,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_in_onchain
      *
-     * @param string|null $first_txs_in_onchain Time when first IN transaction occurred
+     * @param int|null $first_txs_in_onchain Unix timestamp when first IN transaction occurred
      *
      * @return self
      */
@@ -2749,7 +2749,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_in_nft
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsInNft()
     {
@@ -2759,7 +2759,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_in_nft
      *
-     * @param string|null $first_txs_in_nft Time when first IN NFT transaction occurred
+     * @param int|null $first_txs_in_nft Unix timestamp when first IN NFT transaction occurred
      *
      * @return self
      */
@@ -2778,7 +2778,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_in_gaming
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsInGaming()
     {
@@ -2788,7 +2788,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_in_gaming
      *
-     * @param string|null $first_txs_in_gaming Time when first IN gaming transaction occurred
+     * @param int|null $first_txs_in_gaming Unix timestamp when first IN gaming transaction occurred
      *
      * @return self
      */
@@ -2807,7 +2807,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_in_gambling
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsInGambling()
     {
@@ -2817,7 +2817,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_in_gambling
      *
-     * @param string|null $first_txs_in_gambling Time when first IN gambling transaction occurred
+     * @param int|null $first_txs_in_gambling Unix timestamp when first IN gambling transaction occurred
      *
      * @return self
      */
@@ -2836,7 +2836,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_out_onchain
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsOutOnchain()
     {
@@ -2846,7 +2846,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_out_onchain
      *
-     * @param string|null $first_txs_out_onchain Time when first OUT transaction occurred
+     * @param int|null $first_txs_out_onchain Unix timestamp when first OUT transaction occurred
      *
      * @return self
      */
@@ -2865,7 +2865,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_out_nft
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsOutNft()
     {
@@ -2875,7 +2875,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_out_nft
      *
-     * @param string|null $first_txs_out_nft Time when first OUT NFT transaction occurred
+     * @param int|null $first_txs_out_nft Unix timestamp when first OUT NFT transaction occurred
      *
      * @return self
      */
@@ -2894,7 +2894,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_out_gaming
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsOutGaming()
     {
@@ -2904,7 +2904,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_out_gaming
      *
-     * @param string|null $first_txs_out_gaming Time when first OUT gaming transaction occurred
+     * @param int|null $first_txs_out_gaming Unix timestamp when first OUT gaming transaction occurred
      *
      * @return self
      */
@@ -2923,7 +2923,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets first_txs_out_gambling
      *
-     * @return string|null
+     * @return int|null
      */
     public function getFirstTxsOutGambling()
     {
@@ -2933,7 +2933,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets first_txs_out_gambling
      *
-     * @param string|null $first_txs_out_gambling Time when first OUT gambling transaction occurred
+     * @param int|null $first_txs_out_gambling Unix timestamp when first OUT gambling transaction occurred
      *
      * @return self
      */
@@ -2952,7 +2952,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_all_onchain
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsAllOnchain()
     {
@@ -2962,7 +2962,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_all_onchain
      *
-     * @param string|null $last_txs_all_onchain Time when last transaction occurred
+     * @param int|null $last_txs_all_onchain Unix timestamp when last transaction occurred
      *
      * @return self
      */
@@ -2981,7 +2981,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_all_nft
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsAllNft()
     {
@@ -2991,7 +2991,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_all_nft
      *
-     * @param string|null $last_txs_all_nft Time when last NFT transaction occurred
+     * @param int|null $last_txs_all_nft Unix timestamp when last NFT transaction occurred
      *
      * @return self
      */
@@ -3010,7 +3010,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_all_gaming
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsAllGaming()
     {
@@ -3020,7 +3020,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_all_gaming
      *
-     * @param string|null $last_txs_all_gaming Time when last gaming transaction occurred
+     * @param int|null $last_txs_all_gaming Unix timestamp when last gaming transaction occurred
      *
      * @return self
      */
@@ -3039,7 +3039,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_all_gambling
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsAllGambling()
     {
@@ -3049,7 +3049,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_all_gambling
      *
-     * @param string|null $last_txs_all_gambling Time when last gambling transaction occurred
+     * @param int|null $last_txs_all_gambling Unix timestamp when last gambling transaction occurred
      *
      * @return self
      */
@@ -3068,7 +3068,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_in_onchain
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsInOnchain()
     {
@@ -3078,7 +3078,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_in_onchain
      *
-     * @param string|null $last_txs_in_onchain Time when last IN transaction occurred
+     * @param int|null $last_txs_in_onchain Unix timestamp when last IN transaction occurred
      *
      * @return self
      */
@@ -3097,7 +3097,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_in_nft
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsInNft()
     {
@@ -3107,7 +3107,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_in_nft
      *
-     * @param string|null $last_txs_in_nft Time when last IN NFT transaction occurred
+     * @param int|null $last_txs_in_nft Unix timestamp when last IN NFT transaction occurred
      *
      * @return self
      */
@@ -3126,7 +3126,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_in_gaming
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsInGaming()
     {
@@ -3136,7 +3136,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_in_gaming
      *
-     * @param string|null $last_txs_in_gaming Time when last IN gaming transaction occurred
+     * @param int|null $last_txs_in_gaming Unix timestamp when last IN gaming transaction occurred
      *
      * @return self
      */
@@ -3155,7 +3155,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_in_gambling
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsInGambling()
     {
@@ -3165,7 +3165,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_in_gambling
      *
-     * @param string|null $last_txs_in_gambling Time when last IN gambling transaction occurred
+     * @param int|null $last_txs_in_gambling Unix timestamp when last IN gambling transaction occurred
      *
      * @return self
      */
@@ -3184,7 +3184,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_out_onchain
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsOutOnchain()
     {
@@ -3194,7 +3194,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_out_onchain
      *
-     * @param string|null $last_txs_out_onchain Time when last OUT transaction occurred
+     * @param int|null $last_txs_out_onchain Unix timestamp when last OUT transaction occurred
      *
      * @return self
      */
@@ -3213,7 +3213,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_out_nft
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsOutNft()
     {
@@ -3223,7 +3223,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_out_nft
      *
-     * @param string|null $last_txs_out_nft Time when last OUT NFT transaction occurred
+     * @param int|null $last_txs_out_nft Unix timestamp when last OUT NFT transaction occurred
      *
      * @return self
      */
@@ -3242,7 +3242,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_out_gaming
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsOutGaming()
     {
@@ -3252,7 +3252,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_out_gaming
      *
-     * @param string|null $last_txs_out_gaming Time when last OUT gaming transaction occurred
+     * @param int|null $last_txs_out_gaming Unix timestamp when last OUT gaming transaction occurred
      *
      * @return self
      */
@@ -3271,7 +3271,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_txs_out_gambling
      *
-     * @return string|null
+     * @return int|null
      */
     public function getLastTxsOutGambling()
     {
@@ -3281,7 +3281,7 @@ class Analytics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_txs_out_gambling
      *
-     * @param string|null $last_txs_out_gambling Time when last OUT gambling transaction occurred
+     * @param int|null $last_txs_out_gambling Unix timestamp when last OUT gambling transaction occurred
      *
      * @return self
      */
